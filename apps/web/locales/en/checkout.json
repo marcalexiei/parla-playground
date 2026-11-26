@@ -1,0 +1,10 @@
+{
+  "title": "Checkout",
+  "items": ".input {$count :integer}\n.match $count\n0 {{Your cart is empty}}\none {{{$count} item in your cart}}\n* {{{$count} items in your cart}}",
+  "add": "Add item",
+  "remove": "Remove item",
+  "total": "Total: {$amount :currency currency=EUR}",
+  "delivery": "Arrives {$date :date style=long}",
+  "terms": "By paying you accept the {#link}terms of sale{/link}.",
+  "pay": "Pay now"
+}

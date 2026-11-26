@@ -1,0 +1,14 @@
+{
+  "app": {
+    "title": "Parla Playground"
+  },
+  "locale": {
+    "label": "Sprache",
+    "name": "{locale, select, en {English} it {Italiano} de {Deutsch} other {{locale}}}"
+  },
+  "actions": {
+    "showAccount": "Konto anzeigen",
+    "hideAccount": "Konto ausblenden"
+  },
+  "loading": "Wird geladen…"
+}

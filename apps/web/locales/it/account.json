@@ -1,0 +1,8 @@
+{
+  "title": "Account",
+  "greeting": "Bentornato, {name}!",
+  "notifications": "{count, plural, =0 {Nessuna nuova notifica} one {Hai # nuova notifica} other {Hai # nuove notifiche}}",
+  "rank": "Questo mese sei arrivato {place, selectordinal, other {#º}}.",
+  "lastLogin": "Ultimo accesso: {when, date, medium} alle {when, time, short}",
+  "role": "{role, select, admin {Puoi gestire il team.} member {Fai parte del team.} other {Hai accesso in sola lettura.}}"
+}

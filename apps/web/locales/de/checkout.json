@@ -1,0 +1,6 @@
+{
+  "title": "Kasse",
+  "items": ".input {$count :integer}\n.match $count\n0 {{Dein Warenkorb ist leer}}\none {{{$count} Artikel im Warenkorb}}\n* {{{$count} Artikel im Warenkorb}}",
+  "total": "Gesamt: {$amount :currency currency=EUR}",
+  "pay": "Jetzt bezahlen"
+}

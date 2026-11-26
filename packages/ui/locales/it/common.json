@@ -1,0 +1,16 @@
+{
+  "app": {
+    "title": "Parla playground",
+    "tagline": "Una sola API, tutte le lingue."
+  },
+  "locale": {
+    "label": "Lingua",
+    "name": "{locale, select, en {English} it {Italiano} de {Deutsch} other {{locale}}}"
+  },
+  "actions": {
+    "showAccount": "Mostra account",
+    "hideAccount": "Nascondi account"
+  },
+  "loading": "Caricamento…",
+  "footer": "Fatto con <link>Parla</link> · {year}"
+}

@@ -1,0 +1,18 @@
+{
+  "name": "parla-playground",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.1",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm -r run build",
+    "typecheck": "pnpm -r run typecheck && tsc -p tsconfig.json",
+    "check": "pnpm --filter web exec parla check && x18n check",
+    "parla:update": "pnpm --dir ../parla pack:all && pnpm install --force"
+  },
+  "devDependencies": {
+    "@parlajs/compiler": "0.0.0",
+    "@x18n/cli": "0.1.14",
+    "oxc-parser": "0.155.0"
+  }
+}

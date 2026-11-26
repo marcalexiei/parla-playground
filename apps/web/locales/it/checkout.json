@@ -1,0 +1,10 @@
+{
+  "title": "Cassa",
+  "items": ".input {$count :integer}\n.match $count\n0 {{Il carrello è vuoto}}\none {{{$count} articolo nel carrello}}\n* {{{$count} articoli nel carrello}}",
+  "add": "Aggiungi articolo",
+  "remove": "Rimuovi articolo",
+  "total": "Totale: {$amount :currency currency=EUR}",
+  "delivery": "Arriva il {$date :date style=long}",
+  "terms": "Pagando accetti le {#link}condizioni di vendita{/link}.",
+  "pay": "Paga ora"
+}
