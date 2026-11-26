@@ -354,7 +354,7 @@ packages:
     resolution: {integrity: sha512-1Duyg48TdJNdyhEB8Xn1L36bT9Pv6GUtlKjHxOys8xkaF/rQq3XJE+bAurSK/AgIz5mGFsb77cn9Pb20+WCScw==}
 
   '@parlajs/compiler@file:../parla/.packs/parlajs-compiler-0.0.0.tgz':
-    resolution: {integrity: sha512-FoHAVQYyKhcmOOvJBnOeEw68S62kZ1OhR/OWb5+gLkh7CDk8vr7T2TNuyFWQByGsDHA6Nius7DTesjS7i1uKpQ==, tarball: file:../parla/.packs/parlajs-compiler-0.0.0.tgz}
+    resolution: {integrity: sha512-l9nUnpiIKHz6kTuW9OLYOp2kqZlxeW+gAqPrTSmrwL6cmaBVmxKkOPaLtGr1g8mf02ymDZpMSI6Enxkh03l+qQ==, tarball: file:../parla/.packs/parlajs-compiler-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     hasBin: true
@@ -365,12 +365,12 @@ packages:
         optional: true
 
   '@parlajs/core@file:../parla/.packs/parlajs-core-0.0.0.tgz':
-    resolution: {integrity: sha512-dQj4AvHsLk7Rj/m/YRNCgRxLc9/juhyaZWe6lf8n67i92/IYi+Y5GeqGJ73+QK2L9Gi4X7idTTmF8cMhpzavtA==, tarball: file:../parla/.packs/parlajs-core-0.0.0.tgz}
+    resolution: {integrity: sha512-sJjWF+ipOorYfxlLjB5/7x5Ef/h0EZNz4pp+5scvRM2y7OXp1NRazXLjWxNCoIuAoQJTUv7jyOG4PAx2XAmRxQ==, tarball: file:../parla/.packs/parlajs-core-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
 
   '@parlajs/format-icu@file:../parla/.packs/parlajs-format-icu-0.0.0.tgz':
-    resolution: {integrity: sha512-XorTysRNN0kXHCGs9AkqdQFZbhqC+47RfKE2/ikpgo8JCsKQplwetdrSOgLQaYm/DWhX+r8Uyz4f0Xj9yCS7JA==, tarball: file:../parla/.packs/parlajs-format-icu-0.0.0.tgz}
+    resolution: {integrity: sha512-JAImwlIIATmDyJW82gIVwW7PH2hgKbDlmtR/OVgq1mMKloVC17nigon7AHNmkoAzzj4CR+c88CrrI10Sl2ny/Q==, tarball: file:../parla/.packs/parlajs-format-icu-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
 
@@ -380,7 +380,7 @@ packages:
     engines: {node: ^24 || >=26}
 
   '@parlajs/react@file:../parla/.packs/parlajs-react-0.0.0.tgz':
-    resolution: {integrity: sha512-9gxPMdCGCwPGLrIv3Z9wL8BaKe6Z4TW3vJ784k7cuRtByVI0aNMdA3QbNgWgi11dkkD9Rjwf0ZQ8ENLvhkO6nw==, tarball: file:../parla/.packs/parlajs-react-0.0.0.tgz}
+    resolution: {integrity: sha512-4b0iugmjHcfZL5wvQfMRLIfZ6MKEXoskaSXQZ5ZgORw1EAVwTIah0DhzyuWhX2YMpQVAcNdCyAo1hH9MYT3WBg==, tarball: file:../parla/.packs/parlajs-react-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     peerDependencies:
