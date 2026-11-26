@@ -56,7 +56,7 @@ function staticKeys(node: unknown): Array<string> | undefined {
   return keys;
 }
 
-/** A `const { t } = useSuspenseParla(['a', 'b'])`, visible inside `scope`; `t` is keyed by namespace. */
+/** A `const { t } = useParla(['a', 'b'])`, visible inside `scope`; `t` is keyed by namespace. */
 interface Binding {
   readonly name: string;
   readonly namespaces: ReadonlyArray<string>;
@@ -248,6 +248,6 @@ const parlaPlaceholders: PlaceholderSyntax = {
 
 export const parla = definePlugin((options: ParlaOptions = {}) => ({
   name: 'parla',
-  scanners: [accessorScanner(new Set(options.callees ?? ['useSuspenseParla', 'useParla']))],
+  scanners: [accessorScanner(new Set(options.callees ?? ['useParla']))],
   placeholders: [parlaPlaceholders],
 }));

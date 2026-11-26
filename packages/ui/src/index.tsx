@@ -1,13 +1,13 @@
-import { useLocale, useSuspenseParla } from '@parlajs/react';
+import { useLocale, useParla } from '@parlajs/react';
 
 export function LocaleSwitcher() {
-  const { t, parla } = useSuspenseParla(['common']);
-  const [locale, setLocale] = useLocale();
+  const { t } = useParla(['common']);
+  const { locale, locales, setLocale } = useLocale();
   return (
     <label className="locale">
       {t.common.locale.label()}
       <select value={locale} onChange={(e) => void setLocale(e.target.value as typeof locale)}>
-        {parla.locales.map((l) => (
+        {locales.map((l) => (
           <option key={l} value={l}>
             {t.common.locale.name({ locale: l })}
           </option>
@@ -18,7 +18,7 @@ export function LocaleSwitcher() {
 }
 
 export function Header() {
-  const { t } = useSuspenseParla(['common']);
+  const { t } = useParla(['common']);
   return (
     <header className="header">
       <div>
@@ -31,7 +31,7 @@ export function Header() {
 }
 
 export function Footer() {
-  const { t } = useSuspenseParla(['common']);
+  const { t } = useParla(['common']);
   return (
     <footer className="footer">
       {t.common.footer({
