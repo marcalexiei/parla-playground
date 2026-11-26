@@ -1,15 +1,15 @@
 import { useLocale, useSuspenseParla } from '@parlajs/react';
 
 export function LocaleSwitcher() {
-  const { t, parla } = useSuspenseParla('common');
+  const { t, parla } = useSuspenseParla(['common']);
   const [locale, setLocale] = useLocale();
   return (
     <label className="locale">
-      {t.locale.label()}
+      {t.common.locale.label()}
       <select value={locale} onChange={(e) => void setLocale(e.target.value as typeof locale)}>
         {parla.locales.map((l) => (
           <option key={l} value={l}>
-            {t.locale.name({ locale: l })}
+            {t.common.locale.name({ locale: l })}
           </option>
         ))}
       </select>
@@ -18,12 +18,12 @@ export function LocaleSwitcher() {
 }
 
 export function Header() {
-  const { t } = useSuspenseParla('common');
+  const { t } = useSuspenseParla(['common']);
   return (
     <header className="header">
       <div>
-        <h1>{t.app.title()}</h1>
-        <p>{t.app.tagline()}</p>
+        <h1>{t.common.app.title()}</h1>
+        <p>{t.common.app.tagline()}</p>
       </div>
       <LocaleSwitcher />
     </header>
@@ -31,10 +31,10 @@ export function Header() {
 }
 
 export function Footer() {
-  const { t } = useSuspenseParla('common');
+  const { t } = useSuspenseParla(['common']);
   return (
     <footer className="footer">
-      {t.footer({
+      {t.common.footer({
         year: String(new Date().getFullYear()),
         link: (children) => <a href="https://github.com/marcalexiei/parla">{children}</a>,
       })}

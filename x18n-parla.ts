@@ -56,11 +56,10 @@ function staticKeys(node: unknown): Array<string> | undefined {
   return keys;
 }
 
-/** A `const { t } = useSuspenseParla('ns')`, visible inside `scope`; a list keys `t` by namespace. */
+/** A `const { t } = useSuspenseParla(['a', 'b'])`, visible inside `scope`; `t` is keyed by namespace. */
 interface Binding {
   readonly name: string;
   readonly namespaces: ReadonlyArray<string>;
-  readonly keyed: boolean;
   readonly scope: Node;
 }
 
@@ -71,19 +70,13 @@ const stringValue = (node: unknown): string | undefined =>
     ? node['value']
     : undefined;
 
-/** `'ns'` or `['a', 'b']`; undefined when any namespace is not a string literal. */
-function namespacesOf(arg: unknown): { namespaces: Array<string>; keyed: boolean } | undefined {
-  const single = stringValue(arg);
-  if (single !== undefined) {
-    return { namespaces: [single], keyed: false };
-  }
+/** `['a', 'b']`; undefined unless every namespace is a string literal. */
+function namespacesOf(arg: unknown): Array<string> | undefined {
   if (!isNode(arg) || arg.type !== 'ArrayExpression') {
     return undefined;
   }
   const namespaces = (arg['elements'] as Array<unknown>).map(stringValue);
-  return namespaces.every((ns) => ns !== undefined)
-    ? { namespaces: namespaces as Array<string>, keyed: true }
-    : undefined;
+  return namespaces.every((ns) => ns !== undefined) ? (namespaces as Array<string>) : undefined;
 }
 
 /** The local name `t` is bound to in `{ t }` or `{ t: alias }`. */
@@ -118,15 +111,15 @@ function collectBindings(
       const callee = init['callee'];
       const [arg] = init['arguments'] as Array<Node>;
       const name = tName(id);
-      const found = namespacesOf(arg);
+      const namespaces = namespacesOf(arg);
       if (
         isNode(callee) &&
         callee.type === 'Identifier' &&
         callees.has(callee['name'] as string) &&
         name !== undefined &&
-        found
+        namespaces
       ) {
-        out.push({ name, ...found, scope: inner });
+        out.push({ name, namespaces, scope: inner });
       }
     }
   }
@@ -179,10 +172,9 @@ function accessorScanner(callees: ReadonlySet<string>): Scanner {
           if (!chain || !binding) {
             return;
           }
-          // A list keys `t` by namespace: `t.checkout.title()`.
-          const [head, ...rest] = chain.segments;
-          const namespace = binding.keyed ? (head?.['name'] as string) : binding.namespaces[0];
-          const segments = binding.keyed ? rest : chain.segments;
+          // `t` is keyed by namespace: `t.checkout.title()`.
+          const [head, ...segments] = chain.segments;
+          const namespace = head?.['name'] as string | undefined;
           const first = segments[0];
           const last = segments.at(-1);
           if (namespace === undefined || !binding.namespaces.includes(namespace) || !first || !last) {
