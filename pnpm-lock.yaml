@@ -380,7 +380,7 @@ packages:
     engines: {node: ^24 || >=26}
 
   '@parlajs/react@file:../parla/.packs/parlajs-react-0.0.0.tgz':
-    resolution: {integrity: sha512-lDTGD1W/PgUeoJNIdHTIivY22wjw5BjMsSIaciO03F5z3XgP8dwmM+Kmyl0VeF7lo2To9REWWdT/VY96j7NfIQ==, tarball: file:../parla/.packs/parlajs-react-0.0.0.tgz}
+    resolution: {integrity: sha512-FMWYkcahx4/5XxFOe7Jxfh/Ra7FEXx0Hhik7aoZpUHSLaA68PFLH3L/C4CjB8+Sr+knJ0W0I2T/yTd0YBvPjaA==, tarball: file:../parla/.packs/parlajs-react-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     peerDependencies:

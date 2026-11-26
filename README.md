@@ -22,7 +22,8 @@ pnpm check          # parla check, then x18n check
 `x18n-parla.ts`, a small plugin:
 
 - **Usages**: x18n's scanner does not follow accessor chains yet, so the plugin finds
-  `const t = useT('ns')` and every `t.a.b(params)` call in its scope.
+  `const { t } = useSuspenseParla('ns')` (or `useParla`) and every `t.a.b(params)` call in its
+  scope. With a list, `useSuspenseParla(['a', 'b'])`, the first segment is the namespace: `t.a.key()`.
 - **Placeholders**: the plugin reads each message's params and markup with Parla's own ICU and
   MF2 parsers, so `param-mismatch` and `invalid-syntax` work for both formats.
 

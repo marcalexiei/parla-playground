@@ -12,7 +12,7 @@ type Placeholder = ReturnType<PlaceholderSyntax['find']>[number];
 type Node = { type: string; start: number; end: number } & Record<string, unknown>;
 
 interface ParlaOptions {
-  /** Functions that take a namespace and return its accessor. Default `['useT']`. */
+  /** Hooks that take a namespace or a list and return `{ t }`. Default: Parla's two React hooks. */
   readonly callees?: readonly string[];
 }
 
@@ -56,14 +56,53 @@ function staticKeys(node: unknown): Array<string> | undefined {
   return keys;
 }
 
-/** A `const t = useT('ns')`, visible inside `scope`. */
+/** A `const { t } = useSuspenseParla('ns')`, visible inside `scope`; a list keys `t` by namespace. */
 interface Binding {
   readonly name: string;
-  readonly namespace: string;
+  readonly namespaces: ReadonlyArray<string>;
+  readonly keyed: boolean;
   readonly scope: Node;
 }
 
 const FUNCTIONS = new Set(['FunctionDeclaration', 'FunctionExpression', 'ArrowFunctionExpression']);
+
+const stringValue = (node: unknown): string | undefined =>
+  isNode(node) && node.type === 'Literal' && typeof node['value'] === 'string'
+    ? node['value']
+    : undefined;
+
+/** `'ns'` or `['a', 'b']`; undefined when any namespace is not a string literal. */
+function namespacesOf(arg: unknown): { namespaces: Array<string>; keyed: boolean } | undefined {
+  const single = stringValue(arg);
+  if (single !== undefined) {
+    return { namespaces: [single], keyed: false };
+  }
+  if (!isNode(arg) || arg.type !== 'ArrayExpression') {
+    return undefined;
+  }
+  const namespaces = (arg['elements'] as Array<unknown>).map(stringValue);
+  return namespaces.every((ns) => ns !== undefined)
+    ? { namespaces: namespaces as Array<string>, keyed: true }
+    : undefined;
+}
+
+/** The local name `t` is bound to in `{ t }` or `{ t: alias }`. */
+function tName(pattern: Node): string | undefined {
+  for (const property of pattern['properties'] as Array<Node>) {
+    const key = property['key'];
+    const value = property['value'];
+    if (
+      property.type === 'Property' &&
+      isNode(key) &&
+      key['name'] === 't' &&
+      isNode(value) &&
+      value.type === 'Identifier'
+    ) {
+      return value['name'] as string;
+    }
+  }
+  return undefined;
+}
 
 function collectBindings(
   node: Node,
@@ -75,17 +114,19 @@ function collectBindings(
   if (node.type === 'VariableDeclarator') {
     const init = node['init'];
     const id = node['id'];
-    if (isNode(init) && init.type === 'CallExpression' && isNode(id) && id.type === 'Identifier') {
+    if (isNode(init) && init.type === 'CallExpression' && isNode(id) && id.type === 'ObjectPattern') {
       const callee = init['callee'];
       const [arg] = init['arguments'] as Array<Node>;
+      const name = tName(id);
+      const found = namespacesOf(arg);
       if (
         isNode(callee) &&
         callee.type === 'Identifier' &&
         callees.has(callee['name'] as string) &&
-        arg?.type === 'Literal' &&
-        typeof arg['value'] === 'string'
+        name !== undefined &&
+        found
       ) {
-        out.push({ name: id['name'] as string, namespace: arg['value'], scope: inner });
+        out.push({ name, ...found, scope: inner });
       }
     }
   }
@@ -98,8 +139,12 @@ function collectBindings(
   }
 }
 
-/** The namespace of the innermost binding of `name` whose scope holds `position`. */
-function resolve(bindings: ReadonlyArray<Binding>, name: string, position: number): string | undefined {
+/** The innermost binding of `name` whose scope holds `position`. */
+function resolve(
+  bindings: ReadonlyArray<Binding>,
+  name: string,
+  position: number,
+): Binding | undefined {
   let best: Binding | undefined;
   for (const binding of bindings) {
     const { scope } = binding;
@@ -109,7 +154,7 @@ function resolve(bindings: ReadonlyArray<Binding>, name: string, position: numbe
       }
     }
   }
-  return best?.namespace;
+  return best;
 }
 
 function accessorScanner(callees: ReadonlySet<string>): Scanner {
@@ -130,18 +175,22 @@ function accessorScanner(callees: ReadonlySet<string>): Scanner {
             return;
           }
           const chain = memberChain(callee);
-          const namespace = chain && resolve(bindings, chain.root['name'] as string, call.start);
-          if (!chain || namespace === undefined) {
+          const binding = chain && resolve(bindings, chain.root['name'] as string, call.start);
+          if (!chain || !binding) {
             return;
           }
-          const first = chain.segments[0];
-          const last = chain.segments.at(-1);
-          if (!first || !last) {
+          // A list keys `t` by namespace: `t.checkout.title()`.
+          const [head, ...rest] = chain.segments;
+          const namespace = binding.keyed ? (head?.['name'] as string) : binding.namespaces[0];
+          const segments = binding.keyed ? rest : chain.segments;
+          const first = segments[0];
+          const last = segments.at(-1);
+          if (namespace === undefined || !binding.namespaces.includes(namespace) || !first || !last) {
             return;
           }
           const [params] = call['arguments'] as Array<Node>;
           usages.push({
-            raw: chain.segments.map((s) => s['name'] as string).join('.'),
+            raw: segments.map((segment) => segment['name'] as string).join('.'),
             range: { start: first.start, end: last.end },
             expression: { start: call.start, end: call.end },
             params: params ? staticKeys(params) : [],
@@ -207,6 +256,6 @@ const parlaPlaceholders: PlaceholderSyntax = {
 
 export const parla = definePlugin((options: ParlaOptions = {}) => ({
   name: 'parla',
-  scanners: [accessorScanner(new Set(options.callees ?? ['useT']))],
+  scanners: [accessorScanner(new Set(options.callees ?? ['useSuspenseParla', 'useParla']))],
   placeholders: [parlaPlaceholders],
 }));

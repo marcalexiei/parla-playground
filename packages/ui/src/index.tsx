@@ -1,8 +1,7 @@
-import { useLocale, useParla, useT } from '@parlajs/react';
+import { useLocale, useSuspenseParla } from '@parlajs/react';
 
 export function LocaleSwitcher() {
-  const t = useT('common');
-  const parla = useParla();
+  const { t, parla } = useSuspenseParla('common');
   const [locale, setLocale] = useLocale();
   return (
     <label className="locale">
@@ -19,7 +18,7 @@ export function LocaleSwitcher() {
 }
 
 export function Header() {
-  const t = useT('common');
+  const { t } = useSuspenseParla('common');
   return (
     <header className="header">
       <div>
@@ -32,7 +31,7 @@ export function Header() {
 }
 
 export function Footer() {
-  const t = useT('common');
+  const { t } = useSuspenseParla('common');
   return (
     <footer className="footer">
       {t.footer({
