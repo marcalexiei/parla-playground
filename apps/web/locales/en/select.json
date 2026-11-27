@@ -1,0 +1,4 @@
+{
+  "payment": ".input {$method :string}\n.match $method\ncard {{Paid with the card ending in {$last4}}}\ntransfer {{Paid by bank transfer, reference {$reference}}}\ncash {{Pay in cash on delivery}}\n* {{Payment pending}}",
+  "role": ".input {$role :string}\n.match $role\nadmin {{You can manage the team}}\nmember {{You are on the team}}\n* {{You have read-only access}}"
+}

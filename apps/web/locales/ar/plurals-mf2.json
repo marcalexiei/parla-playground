@@ -1,0 +1,4 @@
+{
+  "files": ".input {$count :number}\n.match $count\nzero {{لا ملفات}}\none {{ملف واحد}}\ntwo {{ملفان}}\nfew {{{$count} ملفات}}\nmany {{{$count} ملفًا}}\n* {{{$count} ملف}}",
+  "place": ".input {$place :number select=ordinal}\n.match $place\n* {{المركز {$place}}}"
+}

@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "label": "Scenarios",
+    "home": "Overview",
+    "plurals": "Plurals and ordinals",
+    "select": "Select",
+    "formatting": "Numbers and dates",
+    "richText": "Rich text",
+    "lazy": "Lazy namespaces",
+    "fallbacks": "Partial locales",
+    "typedProps": "Typed props",
+    "sharedPackage": "Shared package",
+    "typeErrors": "Type errors"
+  },
+  "home": {
+    "title": "Type-safe messages, one chunk per locale and namespace",
+    "intro": "Each page is one scenario, with the component and the catalog that drive it.",
+    "try": "Switch the language in the header. With a chunk delay you can watch <code>setLocale</code> load the new chunks while the old text stays. Then whatever changed lights up.",
+    "cards": "{count, plural, one {# scenario} other {# scenarios}}"
+  },
+  "pages": {
+    "plurals": {
+      "title": "Plurals and ordinals",
+      "intro": "The same messages in ICU and in MessageFormat 2. Each locale has its own plural categories: Arabic uses six."
+    },
+    "select": {
+      "title": "Select, typed per branch",
+      "intro": "A branch’s params are required only with its key: <code>card</code> needs <code>last4</code>, <code>cash</code> needs nothing."
+    },
+    "formatting": {
+      "title": "Numbers, currency, dates and units",
+      "intro": "Values format through <code>Intl</code> in the current locale, so they all follow a switch."
+    },
+    "richText": {
+      "title": "Rich text",
+      "intro": "Tags become React elements. A call passes a callback per tag, or leaves out the ones the config’s <code>markup</code> renders."
+    },
+    "lazy": {
+      "title": "Lazy namespaces",
+      "intro": "This page’s namespace loaded in the route loader, so the page never suspended. The panel below suspends in <code>useParla</code> instead."
+    },
+    "fallbacks": {
+      "title": "Partial locales",
+      "intro": "German is partial. Parla fills each missing key from English at build time: nothing is blank and nothing throws."
+    },
+    "typedProps": {
+      "title": "Typed props",
+      "intro": "Each child takes the <code>Translations</code> of one namespace. The parent loads two, and its wider <code>t</code> fits both."
+    },
+    "sharedPackage": {
+      "title": "A namespace from a shared package",
+      "intro": "<code>packages/ui</code> owns and builds <code>common</code>. The app imports that namespace object like one of its own."
+    },
+    "typeErrors": {
+      "title": "Type errors Parla catches",
+      "intro": "Each error is real: <code>tsc</code> checks this file, and a <code>@ts-expect-error</code> fails if its error goes away."
+    }
+  },
+  "lab": {
+    "delay": "Chunk delay",
+    "off": "None",
+    "showing": "Showing {locale}",
+    "switching": "Loading {locale}. The page stays in {current} until every chunk is ready.",
+    "chunks": "{count, plural, =0 {No chunks} one {# chunk} other {# chunks}}",
+    "log": "Chunks fetched",
+    "close": "Close",
+    "clear": "Clear",
+    "empty": "Nothing fetched yet.",
+    "pending": "loading",
+    "fallbacks": "Suspense fallbacks shown while switching locale: {count, number}",
+    "highlight": "Highlight changes"
+  },
+  "code": {
+    "label": "Code"
+  }
+}

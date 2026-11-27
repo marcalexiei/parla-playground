@@ -1,0 +1,16 @@
+{
+  "price": ".input {$currency :string}\n{{الإجمالي: {$amount :currency currency=$currency}}}",
+  "distance": "المسافة: {$km :unit unit=kilometer}",
+  "speed": "السرعة القصوى: {$kmh :unit unit=kilometer-per-hour unitDisplay=long maximumFractionDigits=0}",
+  "share": "النسبة: {$ratio :percent maximumFractionDigits=1}",
+  "views": "المشاهدات: {$views :number notation=compact}",
+  "date": "اليوم هو {$when :date style=full}",
+  "time": "الساعة الآن {$when :time precision=second}",
+  "datetime": "آخر تحديث {$when :datetime dateStyle=medium timeStyle=short}",
+  "relative": "الاستحقاق {$days :relative unit=day}",
+  "input": {
+    "amount": "المبلغ",
+    "currency": "العملة",
+    "days": "الأيام من اليوم"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "label": "Scenari",
+    "home": "Panoramica",
+    "plurals": "Plurali e ordinali",
+    "select": "Selezione",
+    "formatting": "Numeri e date",
+    "richText": "Testo formattato",
+    "lazy": "Namespace lazy",
+    "fallbacks": "Lingue parziali",
+    "typedProps": "Prop tipizzate",
+    "sharedPackage": "Pacchetto condiviso",
+    "typeErrors": "Errori di tipo"
+  },
+  "home": {
+    "title": "Messaggi tipizzati, un chunk per lingua e namespace",
+    "intro": "Ogni pagina è uno scenario, con il componente e il catalogo che lo fanno funzionare.",
+    "try": "Cambia lingua nell’intestazione. Con un ritardo sui chunk vedi <code>setLocale</code> caricare i nuovi chunk mentre resta il testo vecchio. Poi ciò che è cambiato si illumina.",
+    "cards": "{count, plural, one {# scenario} other {# scenari}}"
+  },
+  "pages": {
+    "plurals": {
+      "title": "Plurali e ordinali",
+      "intro": "Gli stessi messaggi in ICU e in MessageFormat 2. Ogni lingua ha le sue categorie di plurale: l’arabo ne usa sei."
+    },
+    "select": {
+      "title": "Select, tipizzato per ramo",
+      "intro": "I parametri di un ramo servono solo con la sua chiave: <code>card</code> richiede <code>last4</code>, <code>cash</code> nulla."
+    },
+    "formatting": {
+      "title": "Numeri, valute, date e unità",
+      "intro": "I valori passano da <code>Intl</code> nella lingua corrente, e la seguono quando cambia."
+    },
+    "richText": {
+      "title": "Testo formattato",
+      "intro": "I tag diventano elementi React. Una chiamata passa una callback per tag, o tralascia quelli che rende il <code>markup</code> della configurazione."
+    },
+    "lazy": {
+      "title": "Namespace lazy",
+      "intro": "Il namespace di questa pagina è stato caricato nel loader della rotta, quindi la pagina non è mai andata in suspense. Il pannello sotto invece va in suspense in <code>useParla</code>."
+    },
+    "fallbacks": {
+      "title": "Lingue parziali",
+      "intro": "Il tedesco è parziale. Parla riempie ogni chiave mancante con l’inglese in fase di build: niente resta vuoto e niente lancia errori."
+    },
+    "typedProps": {
+      "title": "Prop tipizzate",
+      "intro": "Ogni figlio riceve le <code>Translations</code> di un namespace. Il genitore ne carica due, e il suo <code>t</code> più ampio va bene per entrambi."
+    },
+    "sharedPackage": {
+      "title": "Un namespace da un pacchetto condiviso",
+      "intro": "<code>packages/ui</code> possiede e compila <code>common</code>. L’app importa quel namespace come uno dei suoi."
+    },
+    "typeErrors": {
+      "title": "Errori di tipo che Parla intercetta",
+      "intro": "Ogni errore è reale: <code>tsc</code> controlla questo file, e un <code>@ts-expect-error</code> fallisce se il suo errore sparisce."
+    }
+  },
+  "lab": {
+    "delay": "Ritardo chunk",
+    "off": "Nessuno",
+    "showing": "Lingua: {locale}",
+    "switching": "Caricamento di {locale}. La pagina resta in {current} finché ogni chunk non è pronto.",
+    "chunks": "{count, plural, =0 {Nessun chunk} one {# chunk} other {# chunk}}",
+    "log": "Chunk scaricati",
+    "close": "Chiudi",
+    "clear": "Svuota",
+    "empty": "Ancora nessun download.",
+    "pending": "in corso",
+    "fallbacks": "Fallback di Suspense mostrati durante un cambio lingua: {count, number}",
+    "highlight": "Evidenzia le modifiche"
+  },
+  "code": {
+    "label": "Codice"
+  }
+}

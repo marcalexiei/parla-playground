@@ -1,0 +1,5 @@
+{
+  "welcome": "Willkommen zurück, <strong>{name}</strong>.",
+  "terms": "Mit dem Fortfahren akzeptierst du die <terms>Nutzungsbedingungen</terms> und die <privacy>Datenschutzerklärung</privacy>.",
+  "shortcut": "Drücke <kbd>Strg</kbd> + <kbd>K</kbd> zum Suchen."
+}

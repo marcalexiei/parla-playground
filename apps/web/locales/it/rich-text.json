@@ -1,0 +1,8 @@
+{
+  "welcome": "Bentornata, <strong>{name}</strong>.",
+  "terms": "Continuando accetti le <terms>condizioni d’uso</terms> e l’<privacy>informativa sulla privacy</privacy>.",
+  "nested": "<link>Leggi il changelog <strong>completo</strong></link>",
+  "address": "Ada Lovelace<br/>Via Esempio 12<br/>Milano",
+  "plan": "Il tuo piano: <badge>{plan}</badge>, si rinnova il {date, date, long}.",
+  "shortcut": "Premi <kbd>Ctrl</kbd> + <kbd>K</kbd> per cercare."
+}

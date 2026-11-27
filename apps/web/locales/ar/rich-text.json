@@ -1,0 +1,8 @@
+{
+  "welcome": "مرحبًا بعودتك يا <strong>{name}</strong>.",
+  "terms": "بالمتابعة توافق على <terms>شروط الاستخدام</terms> و<privacy>سياسة الخصوصية</privacy>.",
+  "nested": "<link>اقرأ سجل التغييرات <strong>كاملًا</strong></link>",
+  "address": "آدا لوفليس<br/>12 شارع المثال<br/>لندن",
+  "plan": "خطتك: <badge>{plan}</badge>، تتجدد في {date, date, long}.",
+  "shortcut": "اضغط <kbd>Ctrl</kbd> + <kbd>K</kbd> للبحث."
+}

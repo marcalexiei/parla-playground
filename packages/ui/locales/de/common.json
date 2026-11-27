@@ -1,14 +1,13 @@
 {
   "app": {
-    "title": "Parla Playground"
+    "title": "Parla-Spielwiese"
   },
   "locale": {
-    "label": "Sprache",
-    "name": "{locale, select, en {English} it {Italiano} de {Deutsch} other {{locale}}}"
+    "label": "Sprache"
   },
-  "actions": {
-    "showAccount": "Konto anzeigen",
-    "hideAccount": "Konto ausblenden"
-  },
-  "loading": "Wird geladen…"
+  "loading": "Wird geladen…",
+  "pager": {
+    "previous": "Zurück",
+    "next": "Weiter"
+  }
 }

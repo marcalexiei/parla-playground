@@ -1,0 +1,7 @@
+{
+  "loaded": "Questa riga viene dal namespace <code>lazy</code>. Il loader della rotta l’ha scaricata insieme al codice della pagina, che è apparsa completa.",
+  "show": "Mostra il pannello account",
+  "hide": "Nascondi il pannello account",
+  "suspending": "In suspense in useParla finché non arriva il chunk account…",
+  "cached": "Un chunk caricato resta in cache: nascondi il pannello, mostralo di nuovo, e appare subito."
+}

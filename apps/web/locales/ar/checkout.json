@@ -1,0 +1,10 @@
+{
+  "title": "الدفع",
+  "items": ".input {$count :integer}\n.match $count\n0 {{سلتك فارغة}}\none {{منتج واحد في سلتك}}\ntwo {{منتجان في سلتك}}\nfew {{{$count} منتجات في سلتك}}\nmany {{{$count} منتجًا في سلتك}}\n* {{{$count} منتج في سلتك}}",
+  "add": "إضافة منتج",
+  "remove": "إزالة منتج",
+  "total": "الإجمالي: {$amount :currency currency=EUR}",
+  "delivery": "يصل في {$date :date style=long}",
+  "terms": "بالدفع توافق على {#link}شروط البيع{/link}.",
+  "pay": "ادفع الآن"
+}

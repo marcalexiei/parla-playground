@@ -1,4 +1,5 @@
 {
   "title": "Konto",
-  "greeting": "Willkommen zurück, {name}!"
+  "greeting": "Willkommen zurück, {name}!",
+  "rank": "{place, selectordinal, other {Diesen Monat bist du auf Platz #.}}"
 }

@@ -1,0 +1,16 @@
+{
+  "price": ".input {$currency :string}\n{{Totale: {$amount :currency currency=$currency}}}",
+  "distance": "Distanza: {$km :unit unit=kilometer}",
+  "speed": "Velocità massima: {$kmh :unit unit=kilometer-per-hour unitDisplay=long maximumFractionDigits=0}",
+  "share": "Quota: {$ratio :percent maximumFractionDigits=1}",
+  "views": "Visualizzazioni: {$views :number notation=compact}",
+  "date": "Oggi è {$when :date style=full}",
+  "time": "Sono le {$when :time precision=second}",
+  "datetime": "Aggiornato il {$when :datetime dateStyle=medium timeStyle=short}",
+  "relative": "Scadenza: {$days :relative unit=day}",
+  "input": {
+    "amount": "Importo",
+    "currency": "Valuta",
+    "days": "Giorni da oggi"
+  }
+}

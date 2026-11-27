@@ -1,0 +1,8 @@
+{
+  "title": "الحساب",
+  "greeting": "مرحبًا بعودتك يا {name}!",
+  "notifications": "{count, plural, =0 {لا إشعارات جديدة} one {لديك إشعار جديد واحد} two {لديك إشعاران جديدان} few {لديك # إشعارات جديدة} many {لديك # إشعارًا جديدًا} other {لديك # إشعار جديد}}",
+  "rank": "{place, selectordinal, other {أنهيت هذا الشهر في المركز #.}}",
+  "lastLogin": "آخر تسجيل دخول: {when, date, medium} الساعة {when, time, short}",
+  "role": "{role, select, admin {يمكنك إدارة الفريق.} member {أنت عضو في الفريق.} other {لديك صلاحية القراءة فقط.}}"
+}

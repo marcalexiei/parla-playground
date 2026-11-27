@@ -8,11 +8,13 @@
     "build": "pnpm -r run build",
     "typecheck": "pnpm -r run typecheck && tsc -p tsconfig.json",
     "check": "pnpm -r exec parla check && x18n check",
-    "parla:update": "pnpm --dir ../parla pack:all && pnpm install --force"
+    "parla:update": "pnpm --dir ${PARLA_DIR:-../parla} pack:all && cp ${PARLA_DIR:-../parla}/.packs/*.tgz vendor/parla/ && pnpm install --force",
+    "preview": "pnpm --filter web preview"
   },
   "devDependencies": {
     "@parlajs/compiler": "0.0.0",
     "@x18n/cli": "0.1.14",
-    "oxc-parser": "0.155.0"
+    "oxc-parser": "0.155.0",
+    "typescript": "^7.0.2"
   }
 }

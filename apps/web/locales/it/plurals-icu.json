@@ -1,0 +1,4 @@
+{
+  "files": "{count, plural, =0 {Nessun file} one {# file} other {# file}}",
+  "place": "{place, selectordinal, many {l’#º posto} other {il #º posto}}"
+}

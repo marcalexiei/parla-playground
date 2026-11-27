@@ -1,0 +1,4 @@
+{
+  "files": "{count, plural, zero {لا ملفات} one {ملف واحد} two {ملفان} few {# ملفات} many {# ملفًا} other {# ملف}}",
+  "place": "{place, selectordinal, other {المركز #}}"
+}

@@ -2,10 +2,10 @@ packages:
   - apps/*
   - packages/*
 
-# Parla is not on npm yet: install the tarballs built by `pnpm parla:update` in ../parla.
+# Parla is not on npm yet: install the tarballs vendored by `pnpm parla:update`.
 overrides:
-  '@parlajs/core': file:../parla/.packs/parlajs-core-0.0.0.tgz
-  '@parlajs/react': file:../parla/.packs/parlajs-react-0.0.0.tgz
-  '@parlajs/compiler': file:../parla/.packs/parlajs-compiler-0.0.0.tgz
-  '@parlajs/format-icu': file:../parla/.packs/parlajs-format-icu-0.0.0.tgz
-  '@parlajs/format-mf2': file:../parla/.packs/parlajs-format-mf2-0.0.0.tgz
+  '@parlajs/core': file:./vendor/parla/parlajs-core-0.0.0.tgz
+  '@parlajs/react': file:./vendor/parla/parlajs-react-0.0.0.tgz
+  '@parlajs/compiler': file:./vendor/parla/parlajs-compiler-0.0.0.tgz
+  '@parlajs/format-icu': file:./vendor/parla/parlajs-format-icu-0.0.0.tgz
+  '@parlajs/format-mf2': file:./vendor/parla/parlajs-format-mf2-0.0.0.tgz

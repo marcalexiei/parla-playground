@@ -1,0 +1,42 @@
+{
+  "nav": {
+    "label": "Szenarien",
+    "home": "Überblick",
+    "plurals": "Plural und Ordinalzahlen",
+    "formatting": "Zahlen und Daten",
+    "richText": "Formatierter Text",
+    "lazy": "Lazy Namespaces",
+    "fallbacks": "Unvollständige Sprachen",
+    "typeErrors": "Typfehler"
+  },
+  "home": {
+    "title": "Typsichere Texte, ein Chunk pro Sprache und Namespace",
+    "intro": "Jede Seite ist ein Szenario, mit der Komponente und dem Katalog dahinter.",
+    "cards": "{count, plural, one {# Szenario} other {# Szenarien}}"
+  },
+  "pages": {
+    "plurals": {
+      "title": "Plural und Ordinalzahlen",
+      "intro": "Dieselben Texte in ICU und in MessageFormat 2. Jede Sprache hat eigene Pluralkategorien: Arabisch hat sechs."
+    },
+    "formatting": {
+      "title": "Zahlen, Währungen, Daten und Einheiten",
+      "intro": "Werte laufen in der aktuellen Sprache durch <code>Intl</code> und folgen jedem Wechsel."
+    },
+    "fallbacks": {
+      "title": "Unvollständige Sprachen",
+      "intro": "Deutsch ist unvollständig. Parla füllt jeden fehlenden Schlüssel beim Build mit Englisch: nichts bleibt leer, nichts wirft."
+    }
+  },
+  "lab": {
+    "delay": "Chunk-Verzögerung",
+    "off": "Keine",
+    "showing": "Sprache: {locale}",
+    "switching": "{locale} wird geladen. Die Seite bleibt auf {current}, bis jeder Chunk bereit ist.",
+    "chunks": "{count, plural, =0 {Keine Chunks} one {# Chunk} other {# Chunks}}",
+    "log": "Geladene Chunks",
+    "close": "Schließen",
+    "clear": "Leeren",
+    "empty": "Noch nichts geladen."
+  }
+}

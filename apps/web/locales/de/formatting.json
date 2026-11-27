@@ -1,0 +1,11 @@
+{
+  "price": ".input {$currency :string}\n{{Gesamt: {$amount :currency currency=$currency}}}",
+  "distance": "Entfernung: {$km :unit unit=kilometer}",
+  "speed": "Höchstgeschwindigkeit: {$kmh :unit unit=kilometer-per-hour unitDisplay=long maximumFractionDigits=0}",
+  "date": "Heute ist {$when :date style=full}",
+  "relative": "Fällig {$days :relative unit=day}",
+  "input": {
+    "amount": "Betrag",
+    "currency": "Währung"
+  }
+}

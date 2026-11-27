@@ -1,16 +1,16 @@
 {
   "app": {
-    "title": "Parla playground",
-    "tagline": "Una sola API, tutte le lingue."
+    "title": "Parla, il playground",
+    "tagline": "i18n tipizzata, caricata quando serve."
   },
   "locale": {
-    "label": "Lingua",
-    "name": "{locale, select, en {English} it {Italiano} de {Deutsch} other {{locale}}}"
-  },
-  "actions": {
-    "showAccount": "Mostra account",
-    "hideAccount": "Nascondi account"
+    "label": "Lingua"
   },
   "loading": "Caricamento…",
+  "pager": {
+    "previous": "Precedente",
+    "next": "Successiva",
+    "status": "Pagina {page, number} di {total, number}"
+  },
   "footer": "Fatto con <link>Parla</link> · {year}"
 }

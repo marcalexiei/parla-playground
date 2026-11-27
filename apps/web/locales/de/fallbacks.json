@@ -1,0 +1,8 @@
+{
+  "welcome": "Willkommen im Shop",
+  "cart": "Dein Warenkorb",
+  "legend": {
+    "own": "übersetzt",
+    "fallback": "aus {locale}"
+  }
+}

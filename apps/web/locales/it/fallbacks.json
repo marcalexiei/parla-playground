@@ -1,0 +1,11 @@
+{
+  "welcome": "Benvenuto nel negozio",
+  "cart": "Il tuo carrello",
+  "shipping": "Spedizione gratuita sopra i 50 euro",
+  "returns": "Reso gratuito entro 30 giorni",
+  "support": "Domande? Il nostro team risponde entro un giorno.",
+  "legend": {
+    "own": "tradotto",
+    "fallback": "da {locale}"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "loaded": "This line comes from the <code>lazy</code> namespace. The route loader fetched it with the page’s code, so the page showed up complete.",
+  "show": "Show the account panel",
+  "hide": "Hide the account panel",
+  "suspending": "Suspending in useParla until the account chunk arrives…",
+  "cached": "A loaded chunk stays cached: hide the panel, show it again, and it renders at once."
+}

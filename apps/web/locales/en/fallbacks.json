@@ -1,0 +1,11 @@
+{
+  "welcome": "Welcome to the store",
+  "cart": "Your cart",
+  "shipping": "Free shipping on orders over 50 euros",
+  "returns": "Free returns within 30 days",
+  "support": "Questions? Our team answers within a day.",
+  "legend": {
+    "own": "translated",
+    "fallback": "from {locale}"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "title": "Account",
+  "title": "Il tuo account",
   "greeting": "Bentornato, {name}!",
   "notifications": "{count, plural, =0 {Nessuna nuova notifica} one {Hai # nuova notifica} other {Hai # nuove notifiche}}",
   "rank": "Questo mese sei arrivato {place, selectordinal, other {#º}}.",

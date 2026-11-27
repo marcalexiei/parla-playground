@@ -1,0 +1,16 @@
+{
+  "app": {
+    "title": "ملعب Parla",
+    "tagline": "ترجمة آمنة النوع، تُحمَّل عند الحاجة."
+  },
+  "locale": {
+    "label": "اللغة"
+  },
+  "loading": "جارٍ التحميل…",
+  "pager": {
+    "previous": "السابق",
+    "next": "التالي",
+    "status": "الصفحة {page, number} من {total, number}"
+  },
+  "footer": "صُنع باستخدام <link>Parla</link> · {year}"
+}

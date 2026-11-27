@@ -1,6 +1,6 @@
 // x18n's JS scanner does not read accessor chains yet, so Parla's `t.cart.items()` needs its own.
 import { compileMessage, defaultFormats, loadConfig, ModuleScope } from '@parlajs/compiler';
-import type { ResolvedConfig } from '@parlajs/compiler';
+import type { CustomFunctions, ResolvedConfig } from '@parlajs/compiler';
 import { definePlugin } from '@x18n/cli';
 import type { Plugin, Scanner } from '@x18n/cli';
 import { parseSync, Visitor } from 'oxc-parser';
@@ -17,6 +17,15 @@ type LocaleFinder = NonNullable<Plugin['localeFinders']>[number];
 /** `file` relative to `root`, as x18n names resources. */
 const relative = (root: string, file: string): string =>
   file.startsWith(`${root}/`) ? file.slice(root.length + 1) : file;
+
+/** What the configs declare, filled once `configFinder` has loaded them. */
+interface Declared {
+  readonly functions: Record<string, CustomFunctions[string]>;
+  /** The configs' `markup`, which a call may leave out. */
+  readonly markup: Array<string>;
+  /** `ns:key` of each `:string` select whose keys need different params. */
+  readonly branchy: Set<string>;
+}
 
 interface ParlaOptions {
   /** Hooks that take a namespace or a list and return `{ t }`. Default: Parla's two React hooks. */
@@ -111,6 +120,41 @@ function namespacesOf(arg: unknown, imports: ReadonlyMap<string, string>): Array
   return namespaces.every((ns) => ns !== undefined) ? (namespaces as Array<string>) : undefined;
 }
 
+/** `Translations<typeof a | typeof b>` → the namespaces of `a` and `b`; undefined for anything else. */
+function translationsOf(type: unknown, imports: ReadonlyMap<string, string>): Array<string> | undefined {
+  if (!isNode(type) || type.type !== 'TSTypeReference') {
+    return undefined;
+  }
+  const name = type['typeName'];
+  const [arg] = ((type['typeArguments'] as Node | null)?.['params'] ?? []) as Array<Node>;
+  if (!isNode(name) || name['name'] !== 'Translations' || !arg) {
+    return undefined;
+  }
+  const queries = arg.type === 'TSUnionType' ? (arg['types'] as Array<Node>) : [arg];
+  const namespaces = queries.map((q) => {
+    const expr = q['exprName'];
+    return q.type === 'TSTypeQuery' && isNode(expr) ? imports.get(expr['name'] as string) : undefined;
+  });
+  return namespaces.every((ns) => ns !== undefined) ? (namespaces as Array<string>) : undefined;
+}
+
+/** `{ t }: { t: Translations<typeof ns> }` in a component's params: `t` passed down by a parent. */
+function propBinding(param: Node, imports: ReadonlyMap<string, string>): [string, Array<string>] | undefined {
+  const literal = (param['typeAnnotation'] as Node | null)?.['typeAnnotation'];
+  const name = param.type === 'ObjectPattern' ? tName(param) : undefined;
+  if (!isNode(literal) || literal.type !== 'TSTypeLiteral' || name === undefined) {
+    return undefined;
+  }
+  for (const member of literal['members'] as Array<Node>) {
+    const key = member['key'];
+    if (member.type === 'TSPropertySignature' && isNode(key) && key['name'] === 't') {
+      const namespaces = translationsOf((member['typeAnnotation'] as Node | null)?.['typeAnnotation'], imports);
+      return namespaces && [name, namespaces];
+    }
+  }
+  return undefined;
+}
+
 /** The local name `t` is bound to in `{ t }` or `{ t: alias }`. */
 function tName(pattern: Node): string | undefined {
   for (const property of pattern['properties'] as Array<Node>) {
@@ -137,6 +181,12 @@ function collectBindings(
   out: Array<Binding>,
 ): void {
   const inner = FUNCTIONS.has(node.type) ? node : scope;
+  for (const param of FUNCTIONS.has(node.type) ? (node['params'] as Array<Node>) : []) {
+    const binding = propBinding(param, imports);
+    if (binding) {
+      out.push({ name: binding[0], namespaces: binding[1], scope: node });
+    }
+  }
   if (node.type === 'VariableDeclarator') {
     const init = node['init'];
     const id = node['id'];
@@ -183,7 +233,7 @@ function resolve(
   return best;
 }
 
-function accessorScanner(callees: ReadonlySet<string>): Scanner {
+function accessorScanner(callees: ReadonlySet<string>, declared: Declared): Scanner {
   return {
     id: 'parla:accessor',
     extensions: ['js', 'jsx', 'mjs', 'ts', 'tsx', 'mts'],
@@ -215,11 +265,13 @@ function accessorScanner(callees: ReadonlySet<string>): Scanner {
             return;
           }
           const [params] = call['arguments'] as Array<Node>;
+          const raw = segments.map((segment) => segment['name'] as string).join('.');
           usages.push({
-            raw: segments.map((segment) => segment['name'] as string).join('.'),
+            raw,
             range: { start: first.start, end: last.end },
             expression: { start: call.start, end: call.end },
-            params: params ? staticKeys(params) : [],
+            // TypeScript checks such a select's params per key; x18n compares one flat list.
+            params: declared.branchy.has(`${namespace}:${raw}`) ? undefined : params ? staticKeys(params) : [],
             kind: 'accessor',
             dynamic: false,
             namespace,
@@ -237,7 +289,7 @@ function accessorScanner(callees: ReadonlySet<string>): Scanner {
 const MF2_ONLY = /\{\s*\$|^\s*\.(?:input|local|match)\b/;
 
 /** Params and markup a message reads, through parla's own parsers. Throws on invalid syntax. */
-function messageNames(value: string): Array<string> {
+function messageNames(value: string, functions: CustomFunctions): Array<string> {
   const formats = MF2_ONLY.test(value) ? ['mf2'] : ['icu', 'mf2'];
   let firstError: unknown;
   for (const id of formats) {
@@ -246,7 +298,7 @@ function messageNames(value: string): Array<string> {
       continue;
     }
     try {
-      const { info } = compileMessage(format.parse(value), new ModuleScope());
+      const { info } = compileMessage(format.parse(value), new ModuleScope(), functions);
       return [...new Set([...info.params.keys(), ...info.markup])];
     } catch (error) {
       firstError ??= error;
@@ -255,13 +307,14 @@ function messageNames(value: string): Array<string> {
   throw firstError;
 }
 
-const parlaPlaceholders: PlaceholderSyntax = {
+const placeholders = (declared: Declared): PlaceholderSyntax => ({
   id: 'parla',
   example: '{name}',
+  implicit: declared.markup,
   find(value) {
     let names: Array<string>;
     try {
-      names = messageNames(value);
+      names = messageNames(value, declared.functions);
     } catch {
       return [];
     }
@@ -272,24 +325,71 @@ const parlaPlaceholders: PlaceholderSyntax = {
   },
   validate(value) {
     try {
-      messageNames(value);
+      messageNames(value, declared.functions);
       return [];
     } catch (error) {
       return [(error as Error).message];
     }
   },
-};
+});
+
+type Catalog = { readonly [key: string]: string | Catalog };
+
+/** `[path, message]` for every leaf of a catalog. */
+function* leaves(catalog: Catalog, prefix = ''): Generator<[string, string]> {
+  for (const [key, value] of Object.entries(catalog)) {
+    if (typeof value === 'string') {
+      yield [`${prefix}${key}`, value];
+    } else {
+      yield* leaves(value, `${prefix}${key}.`);
+    }
+  }
+}
+
+/** Fills `declared` from the configs and their source catalogs. */
+async function declare(
+  declared: Declared,
+  configs: ReadonlyArray<ResolvedConfig>,
+  readFile: (path: string) => Promise<string | undefined>,
+): Promise<void> {
+  for (const config of configs) {
+    Object.assign(declared.functions, config.functions);
+    declared.markup.push(...config.markup.filter((tag) => !declared.markup.includes(tag)));
+    for (const ns of config.namespaces) {
+      const format = defaultFormats[ns.format];
+      let catalog: Catalog;
+      try {
+        catalog = JSON.parse((await readFile(ns.file(config.sourceLocale))) ?? '{}') as Catalog;
+      } catch {
+        continue;
+      }
+      for (const [key, value] of leaves(catalog)) {
+        try {
+          if (format && compileMessage(format.parse(value), new ModuleScope(), config.functions).info.branches) {
+            declared.branchy.add(`${ns.name}:${key}`);
+          }
+        } catch {
+          // Reported by `invalid-syntax`.
+        }
+      }
+    }
+  }
+}
 
 /**
  * Each catalog file under the namespace its parla config gives it, so `scopeAudit` may live in
  * `scope_audit.json`; `pre`, so these names win over a `resources` pattern matching the same file.
  */
-function configFinder(configs: readonly string[] | undefined): LocaleFinder {
+function configFinder(configs: readonly string[] | undefined, declared: Declared): LocaleFinder {
   let loaded: Promise<Array<ResolvedConfig>> | undefined;
-  const load = async (root: string, glob: () => Promise<Array<string>>): Promise<Array<ResolvedConfig>> => {
+  const load = async (host: Parameters<LocaleFinder['find']>[0]['host']): Promise<Array<ResolvedConfig>> => {
     loaded ??= (async () => {
-      const files = configs ?? (await glob());
-      return Promise.all(files.map(async (file) => loadConfig(root, file)));
+      const files =
+        configs ??
+        (await host.glob(['**/parla.config.ts'], { ignore: ['**/node_modules/**'], gitignore: true }));
+      const all = await Promise.all(files.map(async (file) => loadConfig(host.root, file)));
+      await declare(declared, all, async (path) => host.readFile(relative(host.root, path)));
+      return all;
     })();
     return loaded;
   };
@@ -297,9 +397,7 @@ function configFinder(configs: readonly string[] | undefined): LocaleFinder {
   return {
     id: 'parla:configs',
     async find({ host }) {
-      resolved = await load(host.root, async () =>
-        host.glob(['**/parla.config.ts'], { ignore: ['**/node_modules/**'], gitignore: true }),
-      );
+      resolved = await load(host);
       return resolved.flatMap((config) =>
         config.namespaces.flatMap((ns) =>
           config.locales.map((locale) => ({
@@ -322,11 +420,14 @@ function configFinder(configs: readonly string[] | undefined): LocaleFinder {
   };
 }
 
-export const parla = definePlugin((options: ParlaOptions = {}) => ({
-  name: 'parla',
-  enforce: 'pre' as const,
-  runtime: 'node' as const,
-  localeFinders: [configFinder(options.configs)],
-  scanners: [accessorScanner(new Set(options.callees ?? ['useParla']))],
-  placeholders: [parlaPlaceholders],
-}));
+export const parla = definePlugin((options: ParlaOptions = {}) => {
+  const declared: Declared = { functions: {}, markup: [], branchy: new Set() };
+  return {
+    name: 'parla',
+    enforce: 'pre' as const,
+    runtime: 'node' as const,
+    localeFinders: [configFinder(options.configs, declared)],
+    scanners: [accessorScanner(new Set(options.callees ?? ['useParla']), declared)],
+    placeholders: [placeholders(declared)],
+  };
+});

@@ -1,0 +1,5 @@
+{
+  "loaded": "Diese Zeile stammt aus dem Namespace <code>lazy</code>. Der Route-Loader hat sie mit dem Code der Seite geladen, also erschien die Seite vollständig.",
+  "show": "Kontobereich anzeigen",
+  "hide": "Kontobereich ausblenden"
+}

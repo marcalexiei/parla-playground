@@ -1,0 +1,3 @@
+{
+  "payment": ".input {$method :string}\n.match $method\ncard {{Bezahlt mit der Karte mit Endziffern {$last4}}}\ntransfer {{Bezahlt per Überweisung, Referenz {$reference}}}\ncash {{Barzahlung bei Lieferung}}\n* {{Zahlung ausstehend}}"
+}
