@@ -354,7 +354,7 @@ packages:
     resolution: {integrity: sha512-1Duyg48TdJNdyhEB8Xn1L36bT9Pv6GUtlKjHxOys8xkaF/rQq3XJE+bAurSK/AgIz5mGFsb77cn9Pb20+WCScw==}
 
   '@parlajs/compiler@file:../parla/.packs/parlajs-compiler-0.0.0.tgz':
-    resolution: {integrity: sha512-2+CrAYQNOGH7rIjznN6o+Nl24KqbXXmpq8PG3laigNVSYuF2/pJQA/aHUpwsZkr5fP+E+o+qw7oAahBS516z/A==, tarball: file:../parla/.packs/parlajs-compiler-0.0.0.tgz}
+    resolution: {integrity: sha512-X24yKfpKzbjuiEit2JK6vsKcIrwRK2JuI4kWImQHrE+GOl8ARqmjM2j9YUA9TgkVWvi9GobiEWXN0Jj1tr7DPQ==, tarball: file:../parla/.packs/parlajs-compiler-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     hasBin: true

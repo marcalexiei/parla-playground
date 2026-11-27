@@ -1,5 +1,6 @@
 // x18n's JS scanner does not read accessor chains yet, so Parla's `t.cart.items()` needs its own.
-import { compileMessage, defaultFormats, ModuleScope } from '@parlajs/compiler';
+import { compileMessage, defaultFormats, loadConfig, ModuleScope } from '@parlajs/compiler';
+import type { ResolvedConfig } from '@parlajs/compiler';
 import { definePlugin } from '@x18n/cli';
 import type { Plugin, Scanner } from '@x18n/cli';
 import { parseSync, Visitor } from 'oxc-parser';
@@ -11,9 +12,17 @@ type Placeholder = ReturnType<PlaceholderSyntax['find']>[number];
 
 type Node = { type: string; start: number; end: number } & Record<string, unknown>;
 
+type LocaleFinder = NonNullable<Plugin['localeFinders']>[number];
+
+/** `file` relative to `root`, as x18n names resources. */
+const relative = (root: string, file: string): string =>
+  file.startsWith(`${root}/`) ? file.slice(root.length + 1) : file;
+
 interface ParlaOptions {
   /** Hooks that take a namespace or a list and return `{ t }`. Default: Parla's two React hooks. */
   readonly callees?: readonly string[];
+  /** Parla configs whose namespaces x18n reads, relative to the root. Default: every `parla.config.ts`. */
+  readonly configs?: readonly string[];
 }
 
 const isNode = (value: unknown): value is Node =>
@@ -271,8 +280,53 @@ const parlaPlaceholders: PlaceholderSyntax = {
   },
 };
 
+/**
+ * Each catalog file under the namespace its parla config gives it, so `scopeAudit` may live in
+ * `scope_audit.json`; `pre`, so these names win over a `resources` pattern matching the same file.
+ */
+function configFinder(configs: readonly string[] | undefined): LocaleFinder {
+  let loaded: Promise<Array<ResolvedConfig>> | undefined;
+  const load = async (root: string, glob: () => Promise<Array<string>>): Promise<Array<ResolvedConfig>> => {
+    loaded ??= (async () => {
+      const files = configs ?? (await glob());
+      return Promise.all(files.map(async (file) => loadConfig(root, file)));
+    })();
+    return loaded;
+  };
+  let resolved: Array<ResolvedConfig> = [];
+  return {
+    id: 'parla:configs',
+    async find({ host }) {
+      resolved = await load(host.root, async () =>
+        host.glob(['**/parla.config.ts'], { ignore: ['**/node_modules/**'], gitignore: true }),
+      );
+      return resolved.flatMap((config) =>
+        config.namespaces.flatMap((ns) =>
+          config.locales.map((locale) => ({
+            path: relative(host.root, ns.file(locale)),
+            locale,
+            namespace: ns.name,
+          })),
+        ),
+      );
+    },
+    resolveNew({ locale, namespace }, { host }) {
+      for (const config of resolved) {
+        const ns = config.namespaces.find((n) => n.name === namespace);
+        if (ns && config.locales.includes(locale)) {
+          return relative(host.root, ns.file(locale));
+        }
+      }
+      return undefined;
+    },
+  };
+}
+
 export const parla = definePlugin((options: ParlaOptions = {}) => ({
   name: 'parla',
+  enforce: 'pre' as const,
+  runtime: 'node' as const,
+  localeFinders: [configFinder(options.configs)],
   scanners: [accessorScanner(new Set(options.callees ?? ['useParla']))],
   placeholders: [parlaPlaceholders],
 }));

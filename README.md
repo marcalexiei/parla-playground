@@ -20,6 +20,8 @@ pnpm check          # parla check, then x18n check
 
 [x18n](https://x18n.dev) checks catalogs and usages through `x18n-parla.ts`, which:
 
+- reads each catalog under the namespace its `parla.config.ts` gives it, so `scopeAudit` may live in
+  `scope_audit.json`;
 - finds `const { t } = useParla([ns])`, naming each `ns` by the `namespaces/<ns>.js` it is
   imported from, and every `t.ns.a.b()` in scope;
 - reads params and markup with Parla's own ICU and MF2 parsers.
