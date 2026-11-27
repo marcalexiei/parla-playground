@@ -2,7 +2,8 @@ import { defineConfig } from '@parlajs/compiler';
 
 // The owner fixes the locales: an app may have fewer, not more.
 export default defineConfig({
-  locales: ['en', 'it', 'de', 'ar'],
+  // Sappadino (Plodarisch) has no text yet: `parla build` fills it from `de`, then `en`.
+  locales: ['en', 'it', 'de', 'de-IT-x-sappada', 'ar'],
   sourceLocale: 'en',
   outDir: 'src/parla',
   namespaces: {

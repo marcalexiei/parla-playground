@@ -41,7 +41,7 @@
     },
     "fallbacks": {
       "title": "Partial locales",
-      "intro": "German is partial. Parla fills each missing key from English at build time: nothing is blank and nothing throws."
+      "intro": "German is partial, and Plodarisch, Sappada’s dialect, has no text of its own yet. Parla fills each missing key at build time, Plodarisch from German first, then English: nothing is blank and nothing throws."
     },
     "typedProps": {
       "title": "Typed props",

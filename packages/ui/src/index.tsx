@@ -4,8 +4,15 @@ import type { ReactNode } from 'react';
 
 import { common } from './parla/namespaces/common.js';
 
+// `Intl` has no name for a private-use tag.
+const OWN_NAMES: Partial<Record<string, string>> = { 'de-IT-x-sappada': 'Plodarisch' };
+
 /** Each locale in its own language: what a reader looks for. */
 const ownName = (locale: string): string => {
+  const known = OWN_NAMES[locale];
+  if (known !== undefined) {
+    return known;
+  }
   const name = new Intl.DisplayNames([locale], { type: 'language' }).of(locale) ?? locale;
   return name.charAt(0).toLocaleUpperCase(locale) + name.slice(1);
 };

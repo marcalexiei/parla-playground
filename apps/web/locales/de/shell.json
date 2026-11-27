@@ -25,7 +25,7 @@
     },
     "fallbacks": {
       "title": "Unvollständige Sprachen",
-      "intro": "Deutsch ist unvollständig. Parla füllt jeden fehlenden Schlüssel beim Build mit Englisch: nichts bleibt leer, nichts wirft."
+      "intro": "Deutsch ist unvollständig, und Plodarisch, der Dialekt von Sappada, hat noch keine eigenen Texte. Parla füllt jeden fehlenden Schlüssel beim Build, Plodarisch erst aus Deutsch, dann aus Englisch: nichts bleibt leer, nichts wirft."
     }
   },
   "lab": {

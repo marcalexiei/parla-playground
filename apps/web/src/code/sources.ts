@@ -38,14 +38,15 @@ const pick = (files: Raw, suffix: string): Load => {
   return key ? files[key] : textSource(suffix, `// ${suffix} not found`).load;
 };
 
-/** The English catalog and, unless it is English, the current locale's. */
+/** The English catalog and, unless it is English, the current locale's, after its base language's. */
 export function catalogSources(
   file: string,
   locale: Locale,
   owner: 'app' | 'ui' = 'app',
 ): Array<Source> {
   const files = owner === 'app' ? appCatalogs : uiCatalogs;
-  const locales = locale === 'en' ? ['en'] : ['en', locale];
+  const [base = locale] = locale.split('-');
+  const locales = [...new Set(['en', base, locale])];
   return locales.map((shown) => ({
     label: `${shown}/${file}.json`,
     load: pick(files, `/${shown}/${file}.json`),

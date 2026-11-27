@@ -3,20 +3,21 @@
 A showcase of [Parla](https://github.com/marcalexiei/parla): one page per scenario, each with the
 component and catalog that drive it.
 
-| Page            | Shows                                                       |
-| --------------- | ----------------------------------------------------------- |
-| Plurals         | Cardinals and ordinals in ICU and MF2, side by side         |
-| Select          | Params typed per branch                                     |
-| Numbers & dates | `Intl` formatting, and a custom `:relative` function        |
-| Rich text       | Tags as React elements; default `markup` from the config    |
-| Lazy namespaces | Loaded in a route loader versus suspending in `useParla`    |
-| Partial locales | `de` falls back to English at build time                    |
-| Typed props     | A child typed `Translations<typeof ns>`, fed a wider `t`    |
-| Shared package  | `packages/ui` owns and builds `common`                      |
-| Type errors     | Errors `tsc` really reports, pinned with `@ts-expect-error` |
+| Page            | Shows                                                         |
+| --------------- | ------------------------------------------------------------- |
+| Plurals         | Cardinals and ordinals in ICU and MF2, side by side           |
+| Select          | Params typed per branch                                       |
+| Numbers & dates | `Intl` formatting, and a custom `:relative` function          |
+| Rich text       | Tags as React elements; default `markup` from the config      |
+| Lazy namespaces | Loaded in a route loader versus suspending in `useParla`      |
+| Partial locales | `de` falls back to English; Sappadino to German, then English |
+| Typed props     | A child typed `Translations<typeof ns>`, fed a wider `t`      |
+| Shared package  | `packages/ui` owns and builds `common`                        |
+| Type errors     | Errors `tsc` really reports, pinned with `@ts-expect-error`   |
 
-The header switches between `en`, `it`, `de` (partial) and `ar` (right to left). The bar below it
-shows `setLocale` loading, adds a chunk delay, logs every chunk fetched and highlights what changed.
+The header switches between `en`, `it`, `de` (partial), Sappadino (`de-IT-x-sappada`, no text yet)
+and `ar` (right to left). The bar below it shows `setLocale` loading, adds a chunk delay, logs every
+chunk fetched and highlights what changed.
 
 ```sh
 pnpm dev         # http://localhost:5173

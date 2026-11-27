@@ -13,10 +13,15 @@ const catalogs: Record<string, Record<string, unknown>> = import.meta.glob(
   },
 );
 
+const keysOf = (tag: string): Record<string, unknown> =>
+  Object.entries(catalogs).find(([path]) => path.includes(`/${tag}/`))?.[1] ?? {};
+
 export function FallbacksDemo(): ReactNode {
   const { t } = useParla([fallbacks]);
   const { locale } = useLocale();
-  const own = Object.entries(catalogs).find(([path]) => path.includes(`/${locale}/`))?.[1] ?? {};
+  // Parla's chain: the locale, its base language, then English.
+  const chain = [...new Set([locale, locale.split('-')[0] ?? locale, 'en'])];
+  const sourceOf = (key: string): string => chain.find((tag) => key in keysOf(tag)) ?? 'en';
   const rows: Array<[string, ReactNode]> = [
     ['welcome', t.fallbacks.welcome()],
     ['cart', t.fallbacks.cart()],
@@ -30,11 +35,11 @@ export function FallbacksDemo(): ReactNode {
         <li key={key} className="fallback-row">
           <code dir="ltr">{key}</code>
           <span>{text}</span>
-          {key in own ? (
+          {sourceOf(key) === locale ? (
             <span className="badge">{t.fallbacks.legend.own()}</span>
           ) : (
             <span className="badge warn">
-              {t.fallbacks.legend.fallback({ locale: localeName('en', locale) })}
+              {t.fallbacks.legend.fallback({ locale: localeName(sourceOf(key), locale) })}
             </span>
           )}
         </li>

@@ -4,9 +4,9 @@ import { parla } from './x18n-parla.ts';
 
 export default defineConfig({
   sourceLocale: 'en',
-  locales: ['en', 'it', 'de', 'ar'],
+  locales: ['en', 'it', 'de', 'de-IT-x-sappada', 'ar'],
   // Parla fills a missing key from English at build time, so a partial locale is not broken.
-  localeFallbacks: { it: 'en', de: 'en', ar: 'en' },
+  localeFallbacks: { it: 'en', de: 'en', 'de-IT-x-sappada': 'de', ar: 'en' },
   resources: [
     { pattern: 'apps/web/locales/{locale}/{namespace}.json' },
     { pattern: 'packages/ui/locales/{locale}/{namespace}.json' },

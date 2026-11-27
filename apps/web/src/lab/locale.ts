@@ -18,6 +18,10 @@ export function direction(locale: string): 'ltr' | 'rtl' {
 
 /** `locale`'s name in `inLocale`, e.g. "Deutsch" or "tedesco". */
 export function localeName(locale: string, inLocale: string = locale): string {
+  // `Intl` has no name for Sappada's private-use tag; Italian calls the dialect "sappadino".
+  if (locale === 'de-IT-x-sappada') {
+    return inLocale.startsWith('it') ? 'Sappadino' : 'Plodarisch';
+  }
   const name = new Intl.DisplayNames([inLocale], { type: 'language' }).of(locale) ?? locale;
   return name.charAt(0).toLocaleUpperCase(inLocale) + name.slice(1);
 }
