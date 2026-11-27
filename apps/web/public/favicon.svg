@@ -1,9 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="3 6 116 116">
-<style>.ink{fill:#16171B}@media (prefers-color-scheme:dark){.ink{fill:#FFFFFF}}</style>
-<defs><clipPath id="c"><circle cx="46" cy="54" r="34"/></clipPath></defs>
-<circle class="ink" cx="46" cy="54" r="34"/>
-<path class="ink" d="M22 70L10 102L40 84Z"/>
-<circle cx="78" cy="62" r="34" fill="#E5412B"/>
-<path d="M98 78L110 108L84 92Z" fill="#E5412B"/>
-<circle class="ink" cx="78" cy="62" r="34" fill-opacity="0.5" clip-path="url(#c)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Parla">
+<circle cx="46" cy="54" r="34" fill="#2563EB"/>
+<path d="M24 78L12 108L44 87Z" fill="#2563EB"/>
+<g fill="none" stroke="#38BDF8" stroke-width="9" stroke-linecap="round">
+<path d="M82.25 25.68A46 46 0 0 1 82.25 82.32"/>
+<path d="M93.28 17.06A60 60 0 0 1 93.28 90.94"/>
+</g>
 </svg>

@@ -37,8 +37,18 @@ export function App(): ReactNode {
     <div className="app">
       <header className="header">
         <a className="brand" href={href('home')}>
-          <span className="brand-title">{title}</span>
-          <span className="brand-tagline">{t.common.app.tagline()}</span>
+          {/* The mark only: the title beside it is translated, the logo's wordmark is not. */}
+          <img
+            className="brand-mark"
+            src={`${import.meta.env.BASE_URL}favicon.svg`}
+            alt=""
+            width={40}
+            height={40}
+          />
+          <span className="brand-text">
+            <span className="brand-title">{title}</span>
+            <span className="brand-tagline">{t.common.app.tagline()}</span>
+          </span>
         </a>
         <LocaleSwitcher
           pending={switching}

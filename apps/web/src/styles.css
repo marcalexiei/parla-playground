@@ -5,10 +5,10 @@
   --paper: #f7f7f5;
   --surface: #ffffff;
   --line: #e2e2dc;
-  --accent: #d93a25;
+  --accent: #2563eb;
   --accent-ink: #ffffff;
-  --accent-soft: #fbe4df;
-  --link: #b52d1a;
+  --accent-soft: #dbeafe;
+  --link: #1d4ed8;
   --code-bg: #f1f1ec;
   --flash: #ffe58a;
   --ok: #1f7a4d;
@@ -34,10 +34,10 @@
     --paper: #141518;
     --surface: #1c1d21;
     --line: #2f3036;
-    --accent: #f0624d;
+    --accent: #60a5fa;
     --accent-ink: #141518;
-    --accent-soft: #3a211d;
-    --link: #ff8a78;
+    --accent-soft: #172554;
+    --link: #93c5fd;
     --code-bg: #18191c;
     --flash: #6b5a12;
     --ok: #6fcf97;
@@ -139,9 +139,17 @@ button[aria-selected='true'] {
 }
 .brand {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   text-decoration: none;
   color: inherit;
+}
+.brand-mark {
+  flex: none;
+}
+.brand-text {
+  display: flex;
+  flex-direction: column;
 }
 .brand-title {
   font-weight: 700;
