@@ -17,14 +17,14 @@
   },
   "devDependencies": {
     "@marcalexiei/oxfmt-config": "2.0.1",
-    "@marcalexiei/oxlint-config": "1.9.0",
+    "@marcalexiei/oxlint-config": "1.10.0",
     "@parlajs/compiler": "0.0.0",
     "@x18n/cli": "0.1.14",
-    "oxc-parser": "0.155.0",
-    "oxfmt": "0.78.0",
-    "oxlint": "1.92.0",
-    "oxlint-tsgolint": "7.0.2006",
-    "typescript": "^7.0.2"
+    "oxc-parser": "0.160.0",
+    "oxfmt": "0.80.0",
+    "oxlint": "1.95.0",
+    "oxlint-tsgolint": "7.0.2008",
+    "typescript": "7.0.2"
   },
-  "packageManager": "pnpm@10.34.1"
+  "packageManager": "pnpm@12.23.0+sha512.02da94ffaf133f46074322afe552f90d40b5f71ae259aefbccdacc5085b1d617e98d65e0131f5748b9b67445978ee5055d7d59a473f1eef0d504854fefcd5975"
 }

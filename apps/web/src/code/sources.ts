@@ -27,7 +27,7 @@ export const textSource = (label: string, text: string): Source => ({ label, loa
 /** A file of this repo, imported as text when its tab opens. */
 export const fileSource = (label: string, load: () => Promise<{ default: string }>): Source => ({
   label,
-  load: async () => {
+  load: async (): Promise<string> => {
     const file = await load();
     return file.default;
   },

@@ -10,7 +10,7 @@ const LOADER = /"(?<locale>[^"]+)": \(\) => import\((?<path>"[^"]+")\)/g;
 function chunkLog(): Plugin {
   return {
     name: 'playground:chunk-log',
-    transform(code, id) {
+    transform(code, id): string | null {
       if (!NAMESPACE_MODULE.test(id.split('?')[0] ?? id)) {
         return null;
       }

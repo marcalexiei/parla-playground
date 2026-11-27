@@ -19,7 +19,7 @@ export function Scenario({
     <article className="scenario">
       <h1>{title}</h1>
       <p className="intro">{intro}</p>
-      {children && <div className="demo">{children}</div>}
+      {children !== undefined && <div className="demo">{children}</div>}
       <CodePanel sources={sources} />
     </article>
   );

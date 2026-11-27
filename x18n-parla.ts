@@ -260,7 +260,7 @@ function accessorScanner(callees: ReadonlySet<string>, declared: Declared): Scan
   return {
     id: 'parla:accessor',
     extensions: ['js', 'jsx', 'mjs', 'ts', 'tsx', 'mts'],
-    scan(file) {
+    scan(file): ReturnType<Scanner['scan']> {
       const { program } = parseSync(file.path, file.text);
       const bindings: Array<Binding> = [];
       const root = program as unknown as Node;
@@ -336,7 +336,7 @@ const placeholders = (declared: Declared): PlaceholderSyntax => ({
   id: 'parla',
   example: '{name}',
   implicit: declared.markup,
-  find(value) {
+  find(value): Array<Placeholder> {
     let names: Array<string>;
     try {
       names = messageNames(value, declared.functions);
@@ -348,7 +348,7 @@ const placeholders = (declared: Declared): PlaceholderSyntax => ({
       return { syntax: 'parla', text: name, name, range: { start, end: start + name.length } };
     });
   },
-  validate(value) {
+  validate(value): Array<string> {
     try {
       messageNames(value, declared.functions);
       return [];
@@ -453,7 +453,7 @@ function configFinder(
   let resolved: Array<ResolvedConfig> = [];
   return {
     id: 'parla:configs',
-    async find({ host }) {
+    async find({ host }): Promise<Awaited<ReturnType<LocaleFinder['find']>>> {
       resolved = await load(host);
       return resolved.flatMap((config) =>
         config.namespaces.flatMap((ns) =>
@@ -465,7 +465,10 @@ function configFinder(
         ),
       );
     },
-    resolveNew({ locale, namespace }, { host }) {
+    resolveNew(
+      { locale, namespace },
+      { host },
+    ): ReturnType<NonNullable<LocaleFinder['resolveNew']>> {
       const ns = resolved
         .filter((config) => config.locales.includes(locale))
         .flatMap((config) => config.namespaces)
