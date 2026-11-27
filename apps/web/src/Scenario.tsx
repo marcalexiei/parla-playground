@@ -14,7 +14,7 @@ export function Scenario({
   intro: ReactNode;
   sources: ReadonlyArray<Source>;
   children?: ReactNode;
-}) {
+}): ReactNode {
   return (
     <article className="scenario">
       <h1>{title}</h1>

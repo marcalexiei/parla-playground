@@ -14,7 +14,7 @@ function flash(elements: ReadonlySet<Element>): void {
   }
 }
 
-const observer = new MutationObserver((mutations) => {
+function onMutations(mutations: ReadonlyArray<MutationRecord>): void {
   if (performance.now() > armedUntil || !getLab().highlight) {
     return;
   }
@@ -26,10 +26,12 @@ const observer = new MutationObserver((mutations) => {
     }
   }
   flash(changed);
-});
+}
 
-observer.observe(document.body, { subtree: true, childList: true, characterData: true });
-
-parla.subscribe(() => {
-  armedUntil = performance.now() + WINDOW_MS;
-});
+/** Highlights the text a locale switch changes. */
+export function startFlash(): void {
+  new MutationObserver(onMutations).observe(document.body, { subtree: true, childList: true, characterData: true });
+  parla.subscribe(() => {
+    armedUntil = performance.now() + WINDOW_MS;
+  });
+}

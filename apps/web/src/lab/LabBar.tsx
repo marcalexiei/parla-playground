@@ -1,5 +1,6 @@
 import { useLocale, useParla } from '@parlajs/react';
 import { useState } from 'react';
+import type { ReactNode } from 'react';
 
 import { shell } from '../parla/namespaces/shell.js';
 import { ChunkLog } from './ChunkLog.js';
@@ -9,15 +10,15 @@ import { update, useLab } from './store.js';
 const DELAYS = [0, 300, 1000, 3000];
 
 /** The locale switch, made visible: its status, a chunk delay, and the chunk log. */
-export function LabBar() {
+export function LabBar(): ReactNode {
   const { t } = useParla([shell]);
   const { locale } = useLocale();
-  const switching = useLab((s) => s.switching);
-  const delay = useLab((s) => s.delay);
-  const highlight = useLab((s) => s.highlight);
-  const chunks = useLab((s) => s.chunks);
+  const switching = useLab((lab) => lab.switching);
+  const delay = useLab((lab) => lab.delay);
+  const highlight = useLab((lab) => lab.highlight);
+  const chunks = useLab((lab) => lab.chunks);
   const [open, setOpen] = useState(false);
-  const loading = chunks.filter((c) => c.ms === undefined).length;
+  const loading = chunks.filter((chunk) => chunk.ms === undefined).length;
 
   return (
     <div className="lab-bar" data-switching={switching ? '' : undefined}>
@@ -30,7 +31,9 @@ export function LabBar() {
       <div className="lab-controls">
         <label>
           {t.shell.lab.delay()}
-          <select value={delay} onChange={(e) => update({ delay: Number(e.target.value) })}>
+          <select value={delay} onChange={(event) => {
+              update({ delay: Number(event.target.value) });
+            }}>
             {DELAYS.map((ms) => (
               <option key={ms} value={ms}>
                 {ms === 0 ? t.shell.lab.off() : milliseconds(locale, ms)}
@@ -39,15 +42,21 @@ export function LabBar() {
           </select>
         </label>
         <label className="check">
-          <input type="checkbox" checked={highlight} onChange={(e) => update({ highlight: e.target.checked })} />
+          <input type="checkbox" checked={highlight} onChange={(event) => {
+              update({ highlight: event.target.checked });
+            }} />
           {t.shell.lab.highlight()}
         </label>
-        <button type="button" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+        <button type="button" aria-expanded={open} onClick={() => {
+            setOpen((wasOpen) => !wasOpen);
+          }}>
           {loading > 0 && <span className="spinner" aria-hidden="true" />}
           {t.shell.lab.chunks({ count: chunks.length })}
         </button>
       </div>
-      {open && <ChunkLog onClose={() => setOpen(false)} />}
+      {open && <ChunkLog onClose={() => {
+            setOpen(false);
+          }} />}
     </div>
   );
 }

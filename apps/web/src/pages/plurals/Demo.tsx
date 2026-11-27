@@ -1,10 +1,25 @@
 import { useLocale, useParla } from '@parlajs/react';
 import { useState } from 'react';
+import type { ReactNode } from 'react';
 
 import { pluralsIcu } from '../../parla/namespaces/pluralsIcu.js';
 import { pluralsMf2 } from '../../parla/namespaces/pluralsMf2.js';
 
-export function PluralsDemo() {
+/** The locale's categories, with the one `value` falls in marked. */
+function Categories({ rules, value }: { rules: Intl.PluralRules; value: number }): ReactNode {
+  const current = rules.select(value);
+  return (
+    <span className="categories" dir="ltr">
+      {rules.resolvedOptions().pluralCategories.map((category) => (
+        <span key={category} className={category === current ? 'category active' : 'category'}>
+          {category}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+export function PluralsDemo(): ReactNode {
   const { t } = useParla([pluralsIcu, pluralsMf2]);
   const { locale } = useLocale();
   const [count, setCount] = useState(3);
@@ -17,11 +32,15 @@ export function PluralsDemo() {
       <div className="controls" dir="ltr">
         <label>
           <code>count = {count}</code>
-          <input type="range" min={0} max={30} value={count} onChange={(e) => setCount(Number(e.target.value))} />
+          <input type="range" min={0} max={30} value={count} onChange={(event) => {
+              setCount(Number(event.target.value));
+            }} />
         </label>
         <label>
           <code>place = {place}</code>
-          <input type="range" min={1} max={30} value={place} onChange={(e) => setPlace(Number(e.target.value))} />
+          <input type="range" min={1} max={30} value={place} onChange={(event) => {
+              setPlace(Number(event.target.value));
+            }} />
         </label>
       </div>
       <table className="compare">
@@ -50,19 +69,5 @@ export function PluralsDemo() {
         </tbody>
       </table>
     </>
-  );
-}
-
-/** The locale's categories, with the one `value` falls in marked. */
-function Categories({ rules, value }: { rules: Intl.PluralRules; value: number }) {
-  const current = rules.select(value);
-  return (
-    <span className="categories" dir="ltr">
-      {rules.resolvedOptions().pluralCategories.map((category) => (
-        <span key={category} className={category === current ? 'category active' : 'category'}>
-          {category}
-        </span>
-      ))}
-    </span>
   );
 }

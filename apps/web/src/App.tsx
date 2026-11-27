@@ -2,6 +2,7 @@ import { useParla } from '@parlajs/react';
 import { Footer, LocaleSwitcher } from '@playground/ui';
 import { common } from '@playground/ui/namespaces/common.js';
 import { useEffect } from 'react';
+import type { ReactNode } from 'react';
 
 import { LabBar } from './lab/LabBar.js';
 import { switchLocale } from './lab/locale.js';
@@ -10,10 +11,10 @@ import { shell } from './parla/namespaces/shell.js';
 import { href, useRouter } from './router.js';
 import type { RouteId } from './routes.js';
 
-export function App() {
+export function App(): ReactNode {
   const { t } = useParla([shell, common]);
   const { id, Page, pending } = useRouter();
-  const switching = useLab((s) => s.switching);
+  const switching = useLab((lab) => lab.switching);
   const labels: Record<RouteId, string> = {
     home: t.shell.nav.home(),
     plurals: t.shell.nav.plurals(),
@@ -39,7 +40,9 @@ export function App() {
           <span className="brand-title">{title}</span>
           <span className="brand-tagline">{t.common.app.tagline()}</span>
         </a>
-        <LocaleSwitcher pending={switching} onSelect={(l) => void switchLocale(l)} />
+        <LocaleSwitcher pending={switching} onSelect={(locale) => {
+            void switchLocale(locale);
+          }} />
       </header>
       <LabBar />
       <div className="layout">

@@ -10,7 +10,7 @@ const catalogs: Record<string, Record<string, unknown>> = import.meta.glob('../.
   import: 'default',
 });
 
-export function FallbacksDemo() {
+export function FallbacksDemo(): ReactNode {
   const { t } = useParla([fallbacks]);
   const { locale } = useLocale();
   const own = Object.entries(catalogs).find(([path]) => path.includes(`/${locale}/`))?.[1] ?? {};

@@ -4,7 +4,7 @@ Rules for agents in the [Parla](https://github.com/marcalexiei/parla) playground
 
 ## Always
 
-- **Run `pnpm typecheck` and `pnpm check` before handing work over.**
+- **Run `pnpm typecheck`, `pnpm check`, `pnpm lint` and `pnpm format:check` before handing work over.**
 - **Never hand-edit `src/parla/`**: `parla build` writes it, in `packages/ui` first.
 - **Fix Parla bugs in `../parla`**, then `pnpm parla:update` (`PARLA_DIR=` for another checkout);
   never patch `node_modules`.
@@ -20,6 +20,7 @@ Rules for agents in the [Parla](https://github.com/marcalexiei/parla) playground
 | `vendor/parla`          | Parla tarballs, committed so CI needs no `../parla`     |
 | `x18n.config.ts`        | [x18n](https://x18n.dev) checks                         |
 | `x18n-parla.ts`         | x18n plugin: parla catalogs, accessors, placeholders    |
+| `oxlint.config.ts`      | oxlint, type-aware: lint after `parla build`            |
 | `.github/workflows`     | `pages.yml` builds and deploys to GitHub Pages          |
 
 - **Parla comes from `vendor/parla/*.tgz`**, via `pnpm-workspace.yaml` overrides.

@@ -1,17 +1,17 @@
 import type { ReactNode } from 'react';
 
 const TOKEN =
-  /(\/\/.*)|("(?:[^"\\]|\\.)*"(?=\s*:))|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)|\b(import|from|export|const|let|function|return|type|interface|extends|typeof|as|await|async|if|new|default|satisfies|declare|readonly)\b|(\bt(?:\.\w+)+)/g;
-const CLASSES = ['', 'tok-comment', 'tok-key', 'tok-string', 'tok-keyword', 'tok-t'];
+  /(?<comment>\/\/.*)|(?<key>"(?:[^"\\]|\\.)*"(?=\s*:))|(?<string>"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)|\b(?<keyword>import|from|export|const|let|function|return|type|interface|extends|typeof|as|await|async|if|new|default|satisfies|declare|readonly)\b|(?<t>\bt(?:\.\w+)+)/g;
+const KINDS = ['comment', 'key', 'string', 'keyword', 't'] as const;
 
 function highlight(line: string): ReactNode {
   const out: Array<ReactNode> = [];
   let last = 0;
   for (const match of line.matchAll(TOKEN)) {
     out.push(line.slice(last, match.index));
-    const group = match.findIndex((g, i) => i > 0 && g !== undefined);
+    const kind = KINDS.find((name) => match.groups?.[name] !== undefined);
     out.push(
-      <span key={match.index} className={CLASSES[group]}>
+      <span key={match.index} className={`tok-${kind}`}>
         {match[0]}
       </span>,
     );
@@ -21,28 +21,28 @@ function highlight(line: string): ReactNode {
   return out;
 }
 
-const EXPECT = /^\s*\/\/ @ts-expect-error (.*)$/;
+const EXPECT = /^\s*\/\/ @ts-expect-error (?<message>.*)$/;
 
 /** Highlighted source; a `// @ts-expect-error <message>` line marks the next line as an error. */
-export function Code({ source }: { source: string }) {
+export function Code({ source }: { source: string }): ReactNode {
   const lines = source.replace(/\n$/, '').split('\n');
   const out: Array<ReactNode> = [];
-  for (let i = 0; i < lines.length; i += 1) {
-    const line = lines[i] ?? '';
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index] ?? '';
     const expected = EXPECT.exec(line);
-    if (expected && i + 1 < lines.length) {
-      i += 1;
+    if (expected && index + 1 < lines.length) {
+      index += 1;
       out.push(
-        <span key={i}>
-          <span className="error-line">{highlight(lines[i] ?? '')}</span>
+        <span key={index}>
+          <span className="error-line">{highlight(lines[index] ?? '')}</span>
           {'\n'}
-          <span className="error-message">{expected[1]}</span>
+          <span className="error-message">{expected.groups?.message}</span>
           {'\n'}
         </span>,
       );
     } else {
       out.push(
-        <span key={i}>
+        <span key={index}>
           {highlight(line)}
           {'\n'}
         </span>,

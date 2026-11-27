@@ -32,7 +32,7 @@ let state: LabState = {
 };
 const listeners = new Set<() => void>();
 
-export function update(patch: Partial<LabState> | ((s: LabState) => Partial<LabState>)): void {
+export function update(patch: Partial<LabState> | ((lab: LabState) => Partial<LabState>)): void {
   state = { ...state, ...(typeof patch === 'function' ? patch(state) : patch) };
   for (const listener of listeners) {
     listener();
@@ -43,43 +43,55 @@ export const getLab = (): LabState => state;
 
 const subscribe = (listener: () => void): (() => void) => {
   listeners.add(listener);
-  return () => listeners.delete(listener);
+  return () => {
+    listeners.delete(listener);
+  };
 };
 
-export function useLab<T>(select: (s: LabState) => T): T {
+export function useLab<Selected>(select: (lab: LabState) => Selected): Selected {
   return useSyncExternalStore(subscribe, () => select(state));
 }
 
 let cause: string | undefined;
 
-/** Runs `fn`, crediting the chunk fetches it starts synchronously to `label`. */
-export function withCause<T>(label: string, fn: () => T): T {
+/** Runs `run`, crediting the chunk fetches it starts synchronously to `label`. */
+export function withCause<Result>(label: string, run: () => Result): Result {
   const previous = cause;
   cause = label;
   try {
-    return fn();
+    return run();
   } finally {
     cause = previous;
   }
 }
 
 let nextId = 0;
-const sleep = async (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = async (ms: number): Promise<void> =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 
 declare global {
-  var __parlaChunk: (<T>(namespace: string, locale: string, load: () => Promise<T>) => Promise<T>) | undefined;
+  var __parlaChunk:
+    | (<Module>(namespace: string, locale: string, load: () => Promise<Module>) => Promise<Module>)
+    | undefined;
 }
 
 // Called by every generated loader, as `vite.config.ts` rewrites them.
-globalThis.__parlaChunk = async (namespace, locale, load) => {
-  const id = nextId++;
+globalThis.__parlaChunk = async <Module>(
+  namespace: string,
+  locale: string,
+  load: () => Promise<Module>,
+): Promise<Module> => {
+  const id = nextId;
+  nextId += 1;
   const started = performance.now();
   const set = (patch: Partial<Chunk>): void => {
-    update((s) => ({ chunks: s.chunks.map((c) => (c.id === id ? { ...c, ...patch } : c)) }));
+    update((lab) => ({ chunks: lab.chunks.map((chunk) => (chunk.id === id ? { ...chunk, ...patch } : chunk)) }));
   };
   const entry = { id, namespace, locale, cause: cause ?? 'useParla' };
   // Deferred: a component suspending in `useParla` starts this during its render.
-  queueMicrotask(() => update((s) => ({ chunks: [...s.chunks, entry] })));
+  queueMicrotask(() => { update((lab) => ({ chunks: [...lab.chunks, entry] })); });
   try {
     if (state.delay > 0) {
       await sleep(state.delay);

@@ -8,13 +8,23 @@
     "build": "pnpm -r run build",
     "typecheck": "pnpm -r run typecheck && tsc -p tsconfig.json",
     "check": "pnpm -r exec parla check && x18n check",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint",
+    "lint:ci": "oxlint --format=github",
+    "lint:fix": "oxlint --fix",
     "parla:update": "pnpm --dir ${PARLA_DIR:-../parla} pack:all && cp ${PARLA_DIR:-../parla}/.packs/*.tgz vendor/parla/ && pnpm install --force",
     "preview": "pnpm --filter web preview"
   },
   "devDependencies": {
+    "@marcalexiei/oxfmt-config": "2.0.1",
+    "@marcalexiei/oxlint-config": "1.9.0",
     "@parlajs/compiler": "0.0.0",
     "@x18n/cli": "0.1.14",
     "oxc-parser": "0.155.0",
+    "oxfmt": "0.78.0",
+    "oxlint": "1.92.0",
+    "oxlint-tsgolint": "7.0.2006",
     "typescript": "^7.0.2"
   }
 }

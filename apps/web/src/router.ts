@@ -50,19 +50,23 @@ async function navigate(): Promise<void> {
   const Page = await load(id);
   if (mine === token) {
     set({ id, Page, pending: null });
-    window.scrollTo({ top: 0 });
+    globalThis.scrollTo({ top: 0 });
   }
 }
 
 /** Loads the first route; resolves once it can render. */
 export async function startRouter(): Promise<void> {
-  window.addEventListener('hashchange', () => void navigate());
+  globalThis.addEventListener('hashchange', () => {
+    void navigate();
+  });
   await navigate();
 }
 
 const subscribe = (listener: () => void): (() => void) => {
   listeners.add(listener);
-  return () => listeners.delete(listener);
+  return () => {
+    listeners.delete(listener);
+  };
 };
 
 export function useRouter(): RouterState {

@@ -22,6 +22,8 @@ shows `setLocale` loading, adds a chunk delay, logs every chunk fetched and high
 pnpm dev         # http://localhost:5173
 pnpm typecheck   # parla build, then tsc, in each package
 pnpm check       # parla check, then x18n check
+pnpm lint        # oxlint, type-aware; lint:fix fixes what it can
+pnpm format      # oxfmt; format:check only checks
 pnpm build       # apps/web/dist, with a relative base for any Pages path
 ```
 

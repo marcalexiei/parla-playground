@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 import type { Plugin } from 'vite';
 
 const NAMESPACE_MODULE = /\/src\/parla\/namespaces\/[^/]+\.js$/;
-const LOADER = /"([^"]+)": \(\) => import\(("[^"]+")\)/g;
+const LOADER = /"(?<locale>[^"]+)": \(\) => import\((?<path>"[^"]+")\)/g;
 
 /** Routes each generated chunk loader through `globalThis.__parlaChunk`, which delays and logs it. */
 function chunkLog(): Plugin {
@@ -12,13 +12,12 @@ function chunkLog(): Plugin {
     name: 'playground:chunk-log',
     transform(code, id) {
       if (!NAMESPACE_MODULE.test(id.split('?')[0] ?? id)) {
-        return undefined;
+        return null;
       }
-      const name = JSON.stringify(/name: "([^"]+)"/.exec(code)?.[1]);
+      const name = JSON.stringify(/name: "(?<name>[^"]+)"/.exec(code)?.groups?.name);
       return code.replaceAll(
         LOADER,
-        (_, locale: string, path: string) =>
-          `"${locale}": () => (globalThis.__parlaChunk ?? ((n, l, f) => f()))(${name}, "${locale}", () => import(${path}))`,
+        `"$<locale>": () => (globalThis.__parlaChunk ?? ((n, l, f) => f()))(${name}, "$<locale>", () => import($<path>))`,
       );
     },
   };

@@ -6,9 +6,11 @@ import { richText } from '../../parla/namespaces/richText.js';
 const PARLA = 'https://github.com/marcalexiei/parla';
 const renewal = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
 
-const link = (children: ReactNode) => <a href={PARLA}>{children}</a>;
+const link = (children: ReactNode): ReactNode => <a href={PARLA}>{children}</a>;
+const badge = (children: ReactNode): ReactNode => <span className="badge">{children}</span>;
+const kbd = (children: ReactNode): ReactNode => <kbd>{children}</kbd>;
 
-export function RichTextDemo() {
+export function RichTextDemo(): ReactNode {
   const { t } = useParla([richText]);
   return (
     <ul className="values">
@@ -17,8 +19,8 @@ export function RichTextDemo() {
       <li>{t.richText.address()}</li>
       <li>{t.richText.terms({ terms: link, privacy: link })}</li>
       <li>{t.richText.nested({ link })}</li>
-      <li>{t.richText.plan({ plan: 'Pro', date: renewal, badge: (children) => <span className="badge">{children}</span> })}</li>
-      <li>{t.richText.shortcut({ kbd: (children) => <kbd>{children}</kbd> })}</li>
+      <li>{t.richText.plan({ plan: 'Pro', date: renewal, badge })}</li>
+      <li>{t.richText.shortcut({ kbd })}</li>
     </ul>
   );
 }

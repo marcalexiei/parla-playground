@@ -9,3 +9,8 @@ overrides:
   '@parlajs/compiler': file:./vendor/parla/parlajs-compiler-0.0.0.tgz
   '@parlajs/format-icu': file:./vendor/parla/parlajs-format-icu-0.0.0.tgz
   '@parlajs/format-mf2': file:./vendor/parla/parlajs-format-mf2-0.0.0.tgz
+
+# The cooling-off period buys nothing against our own packages.
+minimumReleaseAgeExclude:
+  - '@marcalexiei/oxfmt-config'
+  - '@marcalexiei/oxlint-config'

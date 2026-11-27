@@ -5,7 +5,7 @@ import { shell } from '../../parla/namespaces/shell.js';
 import { href } from '../../router.js';
 import type { RouteId } from '../../routes.js';
 
-export function Page() {
+export function Page(): ReactNode {
   const { t } = useParla([shell]);
   const cards: Array<[RouteId, string, ReactNode]> = [
     ['plurals', t.shell.pages.plurals.title(), t.shell.pages.plurals.intro()],

@@ -1,17 +1,19 @@
 import { useParla } from '@parlajs/react';
+import type { ReactNode } from 'react';
 
+import { fileSource } from '../../code/sources.js';
 import { shell } from '../../parla/namespaces/shell.js';
 import { Scenario } from '../../Scenario.js';
 
-export function Page() {
+export function Page(): ReactNode {
   const { t } = useParla([shell]);
   return (
     <Scenario
       title={t.shell.pages.typeErrors.title()}
       intro={t.shell.pages.typeErrors.intro()}
       sources={[
-        { label: 'examples.tsx', load: async () => (await import('./examples.tsx?raw')).default },
-        { label: 'checkout.d.ts', load: async () => (await import('../../parla/namespaces/checkout.d.ts?raw')).default },
+        fileSource('examples.tsx', async () => import('./examples.tsx?raw')),
+        fileSource('checkout.d.ts', async () => import('../../parla/namespaces/checkout.d.ts?raw')),
       ]}
     />
   );

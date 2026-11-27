@@ -35,8 +35,11 @@ function syncDocument(): void {
   }
 }
 
-parla.subscribe(syncDocument);
-syncDocument();
+/** Keeps `<html lang dir>` and the saved locale in step with Parla's. */
+export function startLocaleSync(): void {
+  parla.subscribe(syncDocument);
+  syncDocument();
+}
 
 /** `setLocale`, with the target kept in the lab store while its chunks load. */
 export async function switchLocale(locale: Locale): Promise<void> {

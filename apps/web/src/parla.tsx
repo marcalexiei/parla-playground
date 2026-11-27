@@ -2,7 +2,7 @@ import { createParla, matchLocale } from '@parlajs/react';
 
 import { catalog } from './parla/catalog.js';
 
-const saved = (() => {
+const saved = ((): string | null => {
   try {
     return localStorage.getItem('locale');
   } catch {
@@ -18,7 +18,7 @@ export const parla = createParla({
     relative: (value, options, locale) =>
       new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(
         Number(value),
-        (options['unit'] ?? 'day') as Intl.RelativeTimeFormatUnit,
+        (options.unit ?? 'day') as Intl.RelativeTimeFormatUnit,
       ),
   },
   // The config's `markup`: tags a call may leave out.

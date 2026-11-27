@@ -1,11 +1,12 @@
 import { useLocale, useParla } from '@parlajs/react';
+import type { ReactNode } from 'react';
 
-import { catalogSources } from '../../code/sources.js';
+import { catalogSources, fileSource } from '../../code/sources.js';
 import { shell } from '../../parla/namespaces/shell.js';
 import { Scenario } from '../../Scenario.js';
 import { SharedPackageDemo } from './Demo.js';
 
-export function Page() {
+export function Page(): ReactNode {
   const { t } = useParla([shell]);
   const { locale } = useLocale();
   return (
@@ -13,15 +14,9 @@ export function Page() {
       title={t.shell.pages.sharedPackage.title()}
       intro={t.shell.pages.sharedPackage.intro()}
       sources={[
-        { label: 'Demo.tsx', load: async () => (await import('./Demo.tsx?raw')).default },
-        {
-          label: 'packages/ui/src/index.tsx',
-          load: async () => (await import('../../../../../packages/ui/src/index.tsx?raw')).default,
-        },
-        {
-          label: 'packages/ui/parla.config.ts',
-          load: async () => (await import('../../../../../packages/ui/parla.config.ts?raw')).default,
-        },
+        fileSource('Demo.tsx', async () => import('./Demo.tsx?raw')),
+        fileSource('packages/ui/src/index.tsx', async () => import('../../../../../packages/ui/src/index.tsx?raw')),
+        fileSource('packages/ui/parla.config.ts', async () => import('../../../../../packages/ui/parla.config.ts?raw')),
         ...catalogSources('common', locale, 'ui'),
       ]}
     >

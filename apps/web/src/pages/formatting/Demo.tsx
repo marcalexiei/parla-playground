@@ -1,11 +1,25 @@
 import { useLocale, useParla } from '@parlajs/react';
 import { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 
 import { formatting } from '../../parla/namespaces/formatting.js';
 
 const CURRENCIES = ['EUR', 'USD', 'JPY', 'GBP'];
 
-export function FormattingDemo() {
+function useNow(): Date {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => {
+      setNow(new Date());
+    }, 1000);
+    return (): void => {
+      clearInterval(id);
+    };
+  }, []);
+  return now;
+}
+
+export function FormattingDemo(): ReactNode {
   const { t } = useParla([formatting]);
   const { locale } = useLocale();
   const [amount, setAmount] = useState(1234.5);
@@ -19,21 +33,27 @@ export function FormattingDemo() {
       <div className="controls">
         <label>
           {t.formatting.input.amount()}
-          <input type="number" step="0.01" value={amount} onChange={(e) => setAmount(Number(e.target.value))} />
+          <input type="number" step="0.01" value={amount} onChange={(event) => {
+              setAmount(Number(event.target.value));
+            }} />
         </label>
         <label>
           {t.formatting.input.currency()}
-          <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
-            {CURRENCIES.map((c) => (
-              <option key={c} value={c}>
-                {currencies.of(c)}
+          <select value={currency} onChange={(event) => {
+              setCurrency(event.target.value);
+            }}>
+            {CURRENCIES.map((code) => (
+              <option key={code} value={code}>
+                {currencies.of(code)}
               </option>
             ))}
           </select>
         </label>
         <label>
           {t.formatting.input.days()} <code dir="ltr">{days}</code>
-          <input type="range" min={-7} max={14} value={days} onChange={(e) => setDays(Number(e.target.value))} />
+          <input type="range" min={-7} max={14} value={days} onChange={(event) => {
+              setDays(Number(event.target.value));
+            }} />
         </label>
       </div>
       <ul className="values">
@@ -49,13 +69,4 @@ export function FormattingDemo() {
       </ul>
     </>
   );
-}
-
-function useNow(): Date {
-  const [now, setNow] = useState(() => new Date());
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  return now;
 }

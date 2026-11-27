@@ -1,11 +1,12 @@
 import { useLocale, useParla } from '@parlajs/react';
+import type { ReactNode } from 'react';
 
-import { catalogSources } from '../../code/sources.js';
+import { catalogSources, fileSource } from '../../code/sources.js';
 import { shell } from '../../parla/namespaces/shell.js';
 import { Scenario } from '../../Scenario.js';
 import { FormattingDemo } from './Demo.js';
 
-export function Page() {
+export function Page(): ReactNode {
   const { t } = useParla([shell]);
   const { locale } = useLocale();
   return (
@@ -13,8 +14,8 @@ export function Page() {
       title={t.shell.pages.formatting.title()}
       intro={t.shell.pages.formatting.intro()}
       sources={[
-        { label: 'Demo.tsx', load: async () => (await import('./Demo.tsx?raw')).default },
-        { label: 'parla.tsx', load: async () => (await import('../../parla.tsx?raw')).default },
+        fileSource('Demo.tsx', async () => import('./Demo.tsx?raw')),
+        fileSource('parla.tsx', async () => import('../../parla.tsx?raw')),
         ...catalogSources('formatting', locale),
       ]}
     >

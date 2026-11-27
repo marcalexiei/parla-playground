@@ -1,5 +1,6 @@
 import { useLocale, useParla } from '@parlajs/react';
 import type { Locale } from '@parlajs/react';
+import type { ReactNode } from 'react';
 
 import { common } from './parla/namespaces/common.js';
 
@@ -16,22 +17,24 @@ export function LocaleSwitcher({
   /** The locale being loaded, if any. */
   pending?: Locale | null;
   onSelect: (locale: Locale) => void;
-}) {
+}): ReactNode {
   const { t } = useParla([common]);
   const { locale, locales } = useLocale();
   return (
     <div className="locale-switcher" role="group" aria-label={t.common.locale.label()}>
-      {locales.map((l) => (
+      {locales.map((option) => (
         <button
-          key={l}
+          key={option}
           type="button"
-          lang={l}
-          aria-pressed={l === locale}
-          aria-busy={l === pending}
-          className={l === pending ? 'pending' : undefined}
-          onClick={() => onSelect(l)}
+          lang={option}
+          aria-pressed={option === locale}
+          aria-busy={option === pending}
+          className={option === pending ? 'pending' : undefined}
+          onClick={() => {
+            onSelect(option);
+          }}
         >
-          {ownName(l)}
+          {ownName(option)}
         </button>
       ))}
     </div>
@@ -46,29 +49,33 @@ export function Pagination({
   page: number;
   total: number;
   onChange: (page: number) => void;
-}) {
+}): ReactNode {
   const { t } = useParla([common]);
   return (
     <nav className="pagination" aria-label={t.common.pager.status({ page, total })}>
-      <button type="button" disabled={page <= 1} onClick={() => onChange(page - 1)}>
+      <button type="button" disabled={page <= 1} onClick={() => {
+          onChange(page - 1);
+        }}>
         {t.common.pager.previous()}
       </button>
       <span>{t.common.pager.status({ page, total })}</span>
-      <button type="button" disabled={page >= total} onClick={() => onChange(page + 1)}>
+      <button type="button" disabled={page >= total} onClick={() => {
+          onChange(page + 1);
+        }}>
         {t.common.pager.next()}
       </button>
     </nav>
   );
 }
 
-export function Footer() {
+const YEAR = String(new Date().getFullYear());
+const parlaLink = (children: ReactNode): ReactNode => <a href="https://github.com/marcalexiei/parla">{children}</a>;
+
+export function Footer(): ReactNode {
   const { t } = useParla([common]);
   return (
     <footer className="footer">
-      {t.common.footer({
-        year: String(new Date().getFullYear()),
-        link: (children) => <a href="https://github.com/marcalexiei/parla">{children}</a>,
-      })}
+      {t.common.footer({ year: YEAR, link: parlaLink })}
     </footer>
   );
 }
