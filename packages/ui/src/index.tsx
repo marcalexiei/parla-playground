@@ -1,7 +1,9 @@
 import { useLocale, useParla } from '@parlajs/react';
 
+import { common } from './parla/namespaces/common.js';
+
 export function LocaleSwitcher() {
-  const { t } = useParla(['common']);
+  const { t } = useParla([common]);
   const { locale, locales, setLocale } = useLocale();
   return (
     <label className="locale">
@@ -18,7 +20,7 @@ export function LocaleSwitcher() {
 }
 
 export function Header() {
-  const { t } = useParla(['common']);
+  const { t } = useParla([common]);
   return (
     <header className="header">
       <div>
@@ -31,7 +33,7 @@ export function Header() {
 }
 
 export function Footer() {
-  const { t } = useParla(['common']);
+  const { t } = useParla([common]);
   return (
     <footer className="footer">
       {t.common.footer({

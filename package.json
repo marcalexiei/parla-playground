@@ -4,10 +4,10 @@
   "type": "module",
   "packageManager": "pnpm@10.34.1",
   "scripts": {
-    "dev": "pnpm --filter web dev",
+    "dev": "pnpm --filter @playground/ui build && pnpm --filter web dev",
     "build": "pnpm -r run build",
     "typecheck": "pnpm -r run typecheck && tsc -p tsconfig.json",
-    "check": "pnpm --filter web exec parla check && x18n check",
+    "check": "pnpm -r exec parla check && x18n check",
     "parla:update": "pnpm --dir ../parla pack:all && pnpm install --force"
   },
   "devDependencies": {

@@ -1,11 +1,15 @@
 import { useParla } from '@parlajs/react';
 import { Footer, Header } from '@playground/ui';
+import { common } from '@playground/ui/namespaces/common.js';
 import { Suspense, useMemo, useState } from 'react';
+
+import { account } from './parla/namespaces/account.js';
+import { checkout } from './parla/namespaces/checkout.js';
 
 const PRICE = 19.9;
 
 function Checkout() {
-  const { t } = useParla(['checkout']);
+  const { t } = useParla([checkout]);
   const [count, setCount] = useState(2);
   const delivery = useMemo(() => new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), []);
   return (
@@ -32,7 +36,7 @@ function Checkout() {
 
 // Loaded on first show, behind its own Suspense placeholder.
 function Account() {
-  const { t } = useParla(['account']);
+  const { t } = useParla([account]);
   const [notifications, setNotifications] = useState(3);
   const lastLogin = useMemo(() => new Date(Date.now() - 26 * 60 * 60 * 1000), []);
   return (
@@ -52,7 +56,7 @@ function Account() {
 }
 
 export function App() {
-  const { t } = useParla(['common']);
+  const { t } = useParla([common]);
   const [showAccount, setShowAccount] = useState(false);
   return (
     <>

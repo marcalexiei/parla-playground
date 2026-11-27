@@ -56,7 +56,7 @@ function staticKeys(node: unknown): Array<string> | undefined {
   return keys;
 }
 
-/** A `const { t } = useParla(['a', 'b'])`, visible inside `scope`; `t` is keyed by namespace. */
+/** A `const { t } = useParla([a, b])`, visible inside `scope`; `t` is keyed by namespace. */
 interface Binding {
   readonly name: string;
   readonly namespaces: ReadonlyArray<string>;
@@ -70,12 +70,35 @@ const stringValue = (node: unknown): string | undefined =>
     ? node['value']
     : undefined;
 
-/** `['a', 'b']`; undefined unless every namespace is a string literal. */
-function namespacesOf(arg: unknown): Array<string> | undefined {
+// Parla writes each namespace to `namespaces/<name>.js`, so the path names it whatever the binding.
+const NAMESPACE_MODULE = /\/namespaces\/([^/]+)\.js$/;
+
+/** Local names of the namespace objects a file imports, to their namespace. */
+function namespaceImports(program: Node): Map<string, string> {
+  const out = new Map<string, string>();
+  for (const statement of program['body'] as Array<Node>) {
+    const name =
+      statement.type === 'ImportDeclaration'
+        ? stringValue(statement['source'])?.match(NAMESPACE_MODULE)?.[1]
+        : undefined;
+    for (const specifier of name ? (statement['specifiers'] as Array<Node>) : []) {
+      const local = specifier['local'];
+      if (specifier.type === 'ImportSpecifier' && isNode(local)) {
+        out.set(local['name'] as string, name as string);
+      }
+    }
+  }
+  return out;
+}
+
+/** `[a, b]`; undefined unless every element is an imported namespace object. */
+function namespacesOf(arg: unknown, imports: ReadonlyMap<string, string>): Array<string> | undefined {
   if (!isNode(arg) || arg.type !== 'ArrayExpression') {
     return undefined;
   }
-  const namespaces = (arg['elements'] as Array<unknown>).map(stringValue);
+  const namespaces = (arg['elements'] as Array<unknown>).map((element) =>
+    isNode(element) && element.type === 'Identifier' ? imports.get(element['name'] as string) : undefined,
+  );
   return namespaces.every((ns) => ns !== undefined) ? (namespaces as Array<string>) : undefined;
 }
 
@@ -101,6 +124,7 @@ function collectBindings(
   node: Node,
   scope: Node,
   callees: ReadonlySet<string>,
+  imports: ReadonlyMap<string, string>,
   out: Array<Binding>,
 ): void {
   const inner = FUNCTIONS.has(node.type) ? node : scope;
@@ -111,7 +135,7 @@ function collectBindings(
       const callee = init['callee'];
       const [arg] = init['arguments'] as Array<Node>;
       const name = tName(id);
-      const namespaces = namespacesOf(arg);
+      const namespaces = namespacesOf(arg, imports);
       if (
         isNode(callee) &&
         callee.type === 'Identifier' &&
@@ -126,7 +150,7 @@ function collectBindings(
   for (const value of Object.values(node)) {
     for (const child of Array.isArray(value) ? value : [value]) {
       if (isNode(child)) {
-        collectBindings(child, inner, callees, out);
+        collectBindings(child, inner, callees, imports, out);
       }
     }
   }
@@ -157,7 +181,8 @@ function accessorScanner(callees: ReadonlySet<string>): Scanner {
     scan(file) {
       const { program } = parseSync(file.path, file.text);
       const bindings: Array<Binding> = [];
-      collectBindings(program as unknown as Node, program as unknown as Node, callees, bindings);
+      const root = program as unknown as Node;
+      collectBindings(root, root, callees, namespaceImports(root), bindings);
       const usages: Array<Usage> = [];
 
       new Visitor({

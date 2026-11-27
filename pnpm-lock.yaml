@@ -354,7 +354,7 @@ packages:
     resolution: {integrity: sha512-1Duyg48TdJNdyhEB8Xn1L36bT9Pv6GUtlKjHxOys8xkaF/rQq3XJE+bAurSK/AgIz5mGFsb77cn9Pb20+WCScw==}
 
   '@parlajs/compiler@file:../parla/.packs/parlajs-compiler-0.0.0.tgz':
-    resolution: {integrity: sha512-l9nUnpiIKHz6kTuW9OLYOp2kqZlxeW+gAqPrTSmrwL6cmaBVmxKkOPaLtGr1g8mf02ymDZpMSI6Enxkh03l+qQ==, tarball: file:../parla/.packs/parlajs-compiler-0.0.0.tgz}
+    resolution: {integrity: sha512-2+CrAYQNOGH7rIjznN6o+Nl24KqbXXmpq8PG3laigNVSYuF2/pJQA/aHUpwsZkr5fP+E+o+qw7oAahBS516z/A==, tarball: file:../parla/.packs/parlajs-compiler-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     hasBin: true
@@ -365,22 +365,22 @@ packages:
         optional: true
 
   '@parlajs/core@file:../parla/.packs/parlajs-core-0.0.0.tgz':
-    resolution: {integrity: sha512-sJjWF+ipOorYfxlLjB5/7x5Ef/h0EZNz4pp+5scvRM2y7OXp1NRazXLjWxNCoIuAoQJTUv7jyOG4PAx2XAmRxQ==, tarball: file:../parla/.packs/parlajs-core-0.0.0.tgz}
+    resolution: {integrity: sha512-+VyxCmXybM0gK3NNrv8AnV94l6+g3E5sSyTD7z+/YjiYdullHwAALGG20TmspRXp0Xhpg82dzxrM9QbiQwF4wQ==, tarball: file:../parla/.packs/parlajs-core-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
 
   '@parlajs/format-icu@file:../parla/.packs/parlajs-format-icu-0.0.0.tgz':
-    resolution: {integrity: sha512-JAImwlIIATmDyJW82gIVwW7PH2hgKbDlmtR/OVgq1mMKloVC17nigon7AHNmkoAzzj4CR+c88CrrI10Sl2ny/Q==, tarball: file:../parla/.packs/parlajs-format-icu-0.0.0.tgz}
+    resolution: {integrity: sha512-XJV62frAUt571aJtNoBGCauWdoeDN9gVjZfHh8f1VJ/IFvouL8kYuBXhlodQFyKYBAZH3vLhxwo6UuUQZPRexg==, tarball: file:../parla/.packs/parlajs-format-icu-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
 
   '@parlajs/format-mf2@file:../parla/.packs/parlajs-format-mf2-0.0.0.tgz':
-    resolution: {integrity: sha512-CYC+O1I04RgPehktYhyAM1TjQc+YOhOyU4/R37KwFIMApPQYAKsZR0izLcw19s77UqtMztuQfqBeorqdgl90Zw==, tarball: file:../parla/.packs/parlajs-format-mf2-0.0.0.tgz}
+    resolution: {integrity: sha512-LgvlDOeb/krndHa3pE9WqWVTiG5kYQp7BqhNDH5aiXfr2fpxyAC5dmp9mxlmoZL87XDva8D7Qt9u4lTGK6ekJg==, tarball: file:../parla/.packs/parlajs-format-mf2-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
 
   '@parlajs/react@file:../parla/.packs/parlajs-react-0.0.0.tgz':
-    resolution: {integrity: sha512-4b0iugmjHcfZL5wvQfMRLIfZ6MKEXoskaSXQZ5ZgORw1EAVwTIah0DhzyuWhX2YMpQVAcNdCyAo1hH9MYT3WBg==, tarball: file:../parla/.packs/parlajs-react-0.0.0.tgz}
+    resolution: {integrity: sha512-4ik4XCeTxiOJN++LnZIDsiiG+GiR0LAbHzntHoho2+QKSk49SJQ5uUmtO0TlW++W6EXwkIt6TY8vGS69rBYq+Q==, tarball: file:../parla/.packs/parlajs-react-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     peerDependencies:

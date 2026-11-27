@@ -8,5 +8,4 @@ export default defineConfig({
     checkout: { format: 'mf2', path: 'locales/{locale}/checkout.json' },
     account: { format: 'icu', path: 'locales/{locale}/account.json' },
   },
-  packages: ['@playground/ui'],
 });
