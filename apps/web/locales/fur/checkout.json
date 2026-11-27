@@ -1,0 +1,10 @@
+{
+  "title": "Cjasse",
+  "items": ".input {$count :integer}\n.match $count\n0 {{Il carel al è vueit}}\none {{{$count} articul tal carel}}\n* {{{$count} articui tal carel}}",
+  "add": "Zonte articul",
+  "remove": "Gjave articul",
+  "total": "Totâl: {$amount :currency currency=EUR}",
+  "delivery": "Al rive ai {$date :date style=long}",
+  "terms": "Paiant tu acetis lis {#link}condizions di vendite{/link}.",
+  "pay": "Paie cumò"
+}

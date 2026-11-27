@@ -1,0 +1,8 @@
+{
+  "welcome": "Ben tornade, <strong>{name}</strong>.",
+  "terms": "Lant indevant tu acetis lis <terms>condizions di ûs</terms> e l’<privacy>informative su la privacy</privacy>.",
+  "nested": "<link>Lei il changelog <strong>complet</strong></link>",
+  "address": "Ada Lovelace<br/>Vie Esempli 12<br/>Udin",
+  "plan": "Il to plan: <badge>{plan}</badge>, si rinove ai {date, date, long}.",
+  "shortcut": "Frache <kbd>Ctrl</kbd> + <kbd>K</kbd> par cirî."
+}

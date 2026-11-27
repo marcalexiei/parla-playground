@@ -1,0 +1,16 @@
+{
+  "price": ".input {$currency :string}\n{{Totâl: {$amount :currency currency=$currency}}}",
+  "distance": "Distance: {$km :unit unit=kilometer}",
+  "speed": "Velocitât massime: {$kmh :unit unit=kilometer-per-hour unitDisplay=long maximumFractionDigits=0}",
+  "share": "Cuote: {$ratio :percent maximumFractionDigits=1}",
+  "views": "Visualizazions: {$views :number notation=compact}",
+  "date": "Vuê al è {$when :date style=full}",
+  "time": "A son lis {$when :time precision=second}",
+  "datetime": "Inzornât ai {$when :datetime dateStyle=medium timeStyle=short}",
+  "relative": "Scjadince: {$days :relative unit=day}",
+  "input": {
+    "amount": "Impuart",
+    "currency": "Monede",
+    "days": "Dîs di vuê"
+  }
+}

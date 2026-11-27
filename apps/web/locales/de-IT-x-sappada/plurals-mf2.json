@@ -1,1 +1,3 @@
-{}
+{
+  "place": ".input {$place :number select=ordinal}\n.match $place\n* {{{$place}. plòtz}}"
+}

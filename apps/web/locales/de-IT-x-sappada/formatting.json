@@ -1,1 +1,3 @@
-{}
+{
+  "date": "Hainte is {$when :date style=full}"
+}

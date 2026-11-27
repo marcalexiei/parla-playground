@@ -1,1 +1,6 @@
-{}
+{
+  "welcome": "Griess Gott in inserme lodn!",
+  "legend": {
+    "fallback": "va {locale}"
+  }
+}

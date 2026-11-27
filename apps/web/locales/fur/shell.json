@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "label": "Senaris",
+    "home": "Panoramiche",
+    "plurals": "Plurâi e ordinâi",
+    "select": "Selezion",
+    "formatting": "Numars e datis",
+    "richText": "Test formatât",
+    "fallbacks": "Lenghis parziâls",
+    "typedProps": "Prop cun tips",
+    "sharedPackage": "Pachet condividût",
+    "typeErrors": "Erôrs di tip"
+  },
+  "home": {
+    "title": "Messaçs cun tips, un chunk par lenghe e namespace",
+    "intro": "Ogni pagjine e je un senari, cul component e il catalic che lu fasin lâ.",
+    "try": "Cambie lenghe te intestazion. Cuntun ritart sui chunk tu viodis <code>setLocale</code> cjariâ i gnûfs chunk intant che il test vieli al reste. Po dopo ce che al è cambiât si impie.",
+    "cards": "{count, plural, one {# senari} other {# senaris}}"
+  },
+  "pages": {
+    "plurals": {
+      "title": "Plurâi e ordinâi",
+      "intro": "I stes messaçs in ICU e in MessageFormat 2. Ogni lenghe e à lis sôs categoriis di plurâl: l’arap int dopre sîs."
+    },
+    "select": {
+      "title": "Select, cun tips par ram",
+      "intro": "I parametris di un ram a coventin dome cu la sô clâf: <code>card</code> al domande <code>last4</code>, <code>cash</code> nuie."
+    },
+    "formatting": {
+      "title": "Numars, monedis, datis e unitâts",
+      "intro": "I valôrs a passin par <code>Intl</code> te lenghe corinte, e le seguissin cuant che e cambie."
+    },
+    "richText": {
+      "title": "Test formatât",
+      "intro": "I tag a deventin elements React. Une clamade e passe une callback par tag, o e lasse fûr chei che al rint il <code>markup</code> de configurazion."
+    },
+    "lazy": {
+      "intro": "Il namespace di cheste pagjine al è stât cjariât tal loader de rote, duncje la pagjine no je mai lade in suspense. Il panel chi sot invezit al va in suspense in <code>useParla</code>."
+    },
+    "fallbacks": {
+      "title": "Lenghis parziâls",
+      "intro": "Il todesc al è parziâl, il sapadin al à dome pocjis tescj siei e al furlan i mancjin cualchi clâf. Parla al jemple ogni clâf che e mancje tal build, come che e dîs la sô configurazion: il sapadin prin dal todesc e po dal inglês, il furlan dal talian. Nuie al reste vueit e nuie al da erôr."
+    },
+    "typedProps": {
+      "title": "Prop cun tips",
+      "intro": "Ogni fi al ricêf lis <code>Translations</code> di un namespace. Il gjenitôr int cjame doi, e il so <code>t</code> plui larc al va ben par ducj i doi."
+    },
+    "sharedPackage": {
+      "title": "Un namespace di un pachet condividût",
+      "intro": "<code>packages/ui</code> al à e al compile <code>common</code>. La app e impuarte chel namespace come un dai siei."
+    },
+    "typeErrors": {
+      "title": "Erôrs di tip che Parla al cjape",
+      "intro": "Ogni erôr al è vêr: <code>tsc</code> al controle chest file, e un <code>@ts-expect-error</code> al falìs se il so erôr al sparìs."
+    }
+  },
+  "lab": {
+    "delay": "Ritart chunk",
+    "off": "Nissun",
+    "showing": "Lenghe: {locale}",
+    "switching": "Daûr a cjariâ {locale}. La pagjine e reste in {current} fin che ogni chunk nol è pront.",
+    "chunks": "{count, plural, =0 {Nissun chunk} one {# chunk} other {# chunk}}",
+    "log": "Chunk discjamâts",
+    "close": "Siere",
+    "clear": "Disvuede",
+    "empty": "Ancjemò nissun discjariament.",
+    "pending": "in cors",
+    "fallbacks": "Fallback di Suspense mostrâts dilunc un cambi di lenghe: {count, number}",
+    "highlight": "Evidenzie i cambiaments"
+  },
+  "code": {
+    "label": "Codiç"
+  }
+}

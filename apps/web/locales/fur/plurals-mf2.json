@@ -1,0 +1,4 @@
+{
+  "files": ".input {$count :number}\n.match $count\n0 {{Nissun file}}\none {{{$count} file}}\n* {{{$count} files}}",
+  "place": ".input {$place :number select=ordinal}\n.match $place\n* {{il {$place}º puest}}"
+}

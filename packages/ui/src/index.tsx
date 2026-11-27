@@ -4,8 +4,11 @@ import type { ReactNode } from 'react';
 
 import { common } from './parla/namespaces/common.js';
 
-// `Intl` has no name for a private-use tag.
-const OWN_NAMES: Partial<Record<string, string>> = { 'de-IT-x-sappada': 'Plodarisch' };
+// `Intl` has no name for a private-use tag, nor browsers for Friulian.
+const OWN_NAMES: Partial<Record<string, string>> = {
+  'de-IT-x-sappada': 'Plodarisch',
+  fur: 'Furlan',
+};
 
 /** Each locale in its own language: what a reader looks for. */
 const ownName = (locale: string): string => {

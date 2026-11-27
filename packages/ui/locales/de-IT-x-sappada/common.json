@@ -1,1 +1,6 @@
-{}
+{
+  "locale": {
+    "label": "Schproche"
+  },
+  "footer": "Gemòcht pit <link>Parla</link> · {year}"
+}

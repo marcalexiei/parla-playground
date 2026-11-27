@@ -16,13 +16,31 @@ export function direction(locale: string): 'ltr' | 'rtl' {
   return (dir ?? (RTL.has(tag.language) ? 'rtl' : 'ltr')) === 'rtl' ? 'rtl' : 'ltr';
 }
 
+// Names `Intl` lacks: Sappada's private-use tag, and Friulian, which browsers' ICU data omits.
+const NAMES: Record<string, Partial<Record<string, string>>> = {
+  '*': { 'de-IT-x-sappada': 'Plodarisch', fur: 'Furlan' },
+  'de-IT-x-sappada': { en: 'englisch', it: 'bèlsch', de: 'taitsch' },
+  en: { fur: 'Friulian' },
+  it: { 'de-IT-x-sappada': 'sappadino', fur: 'friulano' },
+  de: { fur: 'Friaulisch' },
+  ar: { fur: 'الفريلايان' },
+  fur: {
+    en: 'inglês',
+    it: 'talian',
+    de: 'todesc',
+    'de-IT-x-sappada': 'sapadin',
+    fur: 'furlan',
+    ar: 'arap',
+  },
+};
+
 /** `locale`'s name in `inLocale`, e.g. "Deutsch" or "tedesco". */
 export function localeName(locale: string, inLocale: string = locale): string {
-  // `Intl` has no name for Sappada's private-use tag; Italian calls the dialect "sappadino".
-  if (locale === 'de-IT-x-sappada') {
-    return inLocale.startsWith('it') ? 'Sappadino' : 'Plodarisch';
-  }
-  const name = new Intl.DisplayNames([inLocale], { type: 'language' }).of(locale) ?? locale;
+  const name =
+    NAMES[inLocale]?.[locale] ??
+    NAMES['*']?.[locale] ??
+    new Intl.DisplayNames([inLocale], { type: 'language' }).of(locale) ??
+    locale;
   return name.charAt(0).toLocaleUpperCase(inLocale) + name.slice(1);
 }
 

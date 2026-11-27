@@ -1,0 +1,16 @@
+{
+  "app": {
+    "title": "Parla, il cjamp di prove",
+    "tagline": "i18n cun tips, cjariade cuant che e covente."
+  },
+  "locale": {
+    "label": "Lenghe"
+  },
+  "loading": "Daûr a cjariâ…",
+  "pager": {
+    "previous": "Indaûr",
+    "next": "Indevant",
+    "status": "Pagjine {page, number} di {total, number}"
+  },
+  "footer": "Fat cun <link>Parla</link> · {year}"
+}

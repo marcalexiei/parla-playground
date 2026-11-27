@@ -1,8 +1,11 @@
 import { defineConfig } from '@parlajs/compiler';
 
+import { localeFallbacks } from './src/lab/fallbacks.ts';
+
 export default defineConfig({
-  // Sappadino (Plodarisch) has no text yet: `parla build` fills it from `de`, then `en`.
-  locales: ['en', 'it', 'de', 'de-IT-x-sappada', 'ar'],
+  locales: ['en', 'it', 'de', 'de-IT-x-sappada', 'fur', 'ar'],
+  // Friulian falls back to Italian; Sappadino to its base, German.
+  fallbacks: localeFallbacks,
   sourceLocale: 'en',
   outDir: 'src/parla',
   functions: { relative: 'number' },

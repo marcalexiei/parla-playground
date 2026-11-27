@@ -1,0 +1,8 @@
+{
+  "title": "Il to account",
+  "greeting": "Ben tornât, {name}!",
+  "notifications": "{count, plural, =0 {Nissune gnove notifiche} one {Tu âs # gnove notifiche} other {Tu âs # gnovis notifichis}}",
+  "rank": "Chest mês tu sês rivât {place, selectordinal, other {#º}}.",
+  "lastLogin": "Ultin acès: {when, date, medium} aes {when, time, short}",
+  "role": "{role, select, admin {Tu puedis gjestî il grup.} member {Tu fasis part dal grup.} other {Tu âs acès dome in leture.}}"
+}

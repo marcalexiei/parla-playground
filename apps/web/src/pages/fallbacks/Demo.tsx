@@ -1,6 +1,7 @@
 import { useLocale, useParla } from '@parlajs/react';
 import type { ReactNode } from 'react';
 
+import { fallbackChain } from '../../lab/fallbacks.js';
 import { localeName } from '../../lab/locale.js';
 import { fallbacks } from '../../parla/namespaces/fallbacks.js';
 
@@ -19,8 +20,7 @@ const keysOf = (tag: string): Record<string, unknown> =>
 export function FallbacksDemo(): ReactNode {
   const { t } = useParla([fallbacks]);
   const { locale } = useLocale();
-  // Parla's chain: the locale, its base language, then English.
-  const chain = [...new Set([locale, locale.split('-')[0] ?? locale, 'en'])];
+  const chain = fallbackChain(locale);
   const sourceOf = (key: string): string => chain.find((tag) => key in keysOf(tag)) ?? 'en';
   const rows: Array<[string, ReactNode]> = [
     ['welcome', t.fallbacks.welcome()],

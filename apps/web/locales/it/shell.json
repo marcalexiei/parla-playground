@@ -41,7 +41,7 @@
     },
     "fallbacks": {
       "title": "Lingue parziali",
-      "intro": "Il tedesco è parziale, e il sappadino non ha ancora testi suoi. Parla riempie ogni chiave mancante in fase di build, il sappadino prima dal tedesco e poi dall’inglese: niente resta vuoto e niente lancia errori."
+      "intro": "Il tedesco è parziale, il sappadino ha solo pochi testi suoi e al friulano mancano alcune chiavi. Parla riempie ogni chiave mancante in fase di build, come dice la sua configurazione: il sappadino prima dal tedesco e poi dall’inglese, il friulano dall’italiano. Niente resta vuoto e niente lancia errori."
     },
     "typedProps": {
       "title": "Prop tipizzate",

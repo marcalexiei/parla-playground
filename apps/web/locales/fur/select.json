@@ -1,0 +1,4 @@
+{
+  "payment": ".input {$method :string}\n.match $method\ncard {{Paiât cu la cjarte che e finìs cun {$last4}}}\ntransfer {{Paiât cun bonific, riferiment {$reference}}}\ncash {{Paiament in contants ae consegne}}\n* {{Paiament in spiete}}",
+  "role": ".input {$role :string}\n.match $role\nadmin {{Tu puedis gjestî il grup}}\nmember {{Tu fasis part dal grup}}\n* {{Tu âs acès dome in leture}}"
+}

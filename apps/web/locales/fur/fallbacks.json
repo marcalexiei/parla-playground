@@ -1,0 +1,8 @@
+{
+  "welcome": "Benvignût te buteghe",
+  "cart": "Il to carel",
+  "legend": {
+    "own": "tradot",
+    "fallback": "di {locale}"
+  }
+}
