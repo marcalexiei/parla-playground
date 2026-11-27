@@ -20,10 +20,10 @@ export const parla = createParla({
   // The config's `functions`: `{$days :relative unit=day}`.
   functions: {
     relative: (value, options, locale) =>
-      new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(
-        Number(value),
-        (options.unit ?? 'day') as Intl.RelativeTimeFormatUnit,
-      ),
+      // The fallback chain, as Parla's own formatters use it: browsers lack `fur`.
+      new Intl.RelativeTimeFormat([locale, ...(catalog.fallbacks?.[locale] ?? [])], {
+        numeric: 'auto',
+      }).format(Number(value), (options.unit ?? 'day') as Intl.RelativeTimeFormatUnit),
   },
   // The config's `markup`: tags a call may leave out.
   markup: {
