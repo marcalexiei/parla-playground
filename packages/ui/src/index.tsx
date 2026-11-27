@@ -32,8 +32,7 @@ export function LocaleSwitcher({
           className={option === pending ? 'pending' : undefined}
           onClick={() => {
             onSelect(option);
-          }}
-        >
+          }}>
           {ownName(option)}
         </button>
       ))}
@@ -53,13 +52,19 @@ export function Pagination({
   const { t } = useParla([common]);
   return (
     <nav className="pagination" aria-label={t.common.pager.status({ page, total })}>
-      <button type="button" disabled={page <= 1} onClick={() => {
+      <button
+        type="button"
+        disabled={page <= 1}
+        onClick={() => {
           onChange(page - 1);
         }}>
         {t.common.pager.previous()}
       </button>
       <span>{t.common.pager.status({ page, total })}</span>
-      <button type="button" disabled={page >= total} onClick={() => {
+      <button
+        type="button"
+        disabled={page >= total}
+        onClick={() => {
           onChange(page + 1);
         }}>
         {t.common.pager.next()}
@@ -69,13 +74,11 @@ export function Pagination({
 }
 
 const YEAR = String(new Date().getFullYear());
-const parlaLink = (children: ReactNode): ReactNode => <a href="https://github.com/marcalexiei/parla">{children}</a>;
+const parlaLink = (children: ReactNode): ReactNode => (
+  <a href="https://github.com/marcalexiei/parla">{children}</a>
+);
 
 export function Footer(): ReactNode {
   const { t } = useParla([common]);
-  return (
-    <footer className="footer">
-      {t.common.footer({ year: YEAR, link: parlaLink })}
-    </footer>
-  );
+  return <footer className="footer">{t.common.footer({ year: YEAR, link: parlaLink })}</footer>;
 }

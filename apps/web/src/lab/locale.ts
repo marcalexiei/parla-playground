@@ -1,6 +1,7 @@
 import type { Locale } from '@parlajs/react';
 
 import { parla } from '../parla.js';
+
 import { getLab, update, withCause } from './store.js';
 
 // Firefox has neither `getTextInfo` nor `textInfo` yet.

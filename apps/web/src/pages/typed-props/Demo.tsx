@@ -17,12 +17,18 @@ function Cart({ t }: { t: Translations<typeof checkout> }): ReactNode {
       <h2>{t.checkout.title()}</h2>
       <p className="output">{t.checkout.items({ count })}</p>
       <div className="row">
-        <button type="button" aria-label={t.checkout.remove()} onClick={() => {
+        <button
+          type="button"
+          aria-label={t.checkout.remove()}
+          onClick={() => {
             setCount((current) => Math.max(0, current - 1));
           }}>
           −
         </button>
-        <button type="button" aria-label={t.checkout.add()} onClick={() => {
+        <button
+          type="button"
+          aria-label={t.checkout.add()}
+          onClick={() => {
             setCount((current) => current + 1);
           }}>
           +
@@ -45,7 +51,10 @@ function Profile({ t }: { t: Translations<typeof account> }): ReactNode {
       <h2>{t.account.title()}</h2>
       <p>{t.account.greeting({ name: 'Ada' })}</p>
       <p>
-        <button type="button" className="link" onClick={() => {
+        <button
+          type="button"
+          className="link"
+          onClick={() => {
             setPlace((current) => (current % 12) + 1);
           }}>
           {t.account.rank({ place })}

@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { catalogSources, fileSource, typesSource } from '../../code/sources.js';
 import { shell } from '../../parla/namespaces/shell.js';
 import { Scenario } from '../../Scenario.js';
+
 import { TypedPropsDemo } from './Demo.js';
 
 export function Page(): ReactNode {
@@ -18,8 +19,7 @@ export function Page(): ReactNode {
         typesSource('checkout'),
         ...catalogSources('checkout', locale),
         ...catalogSources('account', locale),
-      ]}
-    >
+      ]}>
       <TypedPropsDemo />
     </Scenario>
   );

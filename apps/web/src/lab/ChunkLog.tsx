@@ -1,8 +1,8 @@
 import { useLocale, useParla } from '@parlajs/react';
-
 import type { ReactNode } from 'react';
 
 import { shell } from '../parla/namespaces/shell.js';
+
 import { milliseconds } from './locale.js';
 import { update, useLab } from './store.js';
 
@@ -16,7 +16,11 @@ export function ChunkLog({ onClose }: { onClose: () => void }): ReactNode {
     <section className="chunk-log" aria-label={t.shell.lab.log()} data-no-flash>
       <header>
         <h2>{t.shell.lab.log()}</h2>
-        <button type="button" onClick={() => { update({ chunks: chunks.filter((chunk) => chunk.ms === undefined) }); }}>
+        <button
+          type="button"
+          onClick={() => {
+            update({ chunks: chunks.filter((chunk) => chunk.ms === undefined) });
+          }}>
           {t.shell.lab.clear()}
         </button>
         <button type="button" onClick={onClose}>

@@ -26,7 +26,8 @@ const set = (next: RouterState): void => {
 };
 
 const ids = Object.keys(routes) as Array<RouteId>;
-const idOf = (hash: string): RouteId => ids.find((id) => `#${routes[id].path}` === (hash || '#/')) ?? 'home';
+const idOf = (hash: string): RouteId =>
+  ids.find((id) => `#${routes[id].path}` === (hash || '#/')) ?? 'home';
 
 export const href = (id: RouteId): string => `#${routes[id].path}`;
 

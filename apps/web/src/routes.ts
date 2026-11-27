@@ -26,7 +26,11 @@ export const routes = {
     namespaces: [pluralsIcu, pluralsMf2],
     page: async () => import('./pages/plurals/Page.js'),
   },
-  select: { path: '/select', namespaces: [select], page: async () => import('./pages/select/Page.js') },
+  select: {
+    path: '/select',
+    namespaces: [select],
+    page: async () => import('./pages/select/Page.js'),
+  },
   formatting: {
     path: '/formatting',
     namespaces: [formatting],
@@ -54,7 +58,11 @@ export const routes = {
     namespaces: [common],
     page: async () => import('./pages/shared-package/Page.js'),
   },
-  typeErrors: { path: '/type-errors', namespaces: [], page: async () => import('./pages/type-errors/Page.js') },
+  typeErrors: {
+    path: '/type-errors',
+    namespaces: [],
+    page: async () => import('./pages/type-errors/Page.js'),
+  },
 } as const satisfies Record<string, Route>;
 
 export type RouteId = keyof typeof routes;

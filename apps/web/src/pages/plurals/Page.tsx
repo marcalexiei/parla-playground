@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { catalogSources, fileSource } from '../../code/sources.js';
 import { shell } from '../../parla/namespaces/shell.js';
 import { Scenario } from '../../Scenario.js';
+
 import { PluralsDemo } from './Demo.js';
 
 export function Page(): ReactNode {
@@ -17,8 +18,7 @@ export function Page(): ReactNode {
         fileSource('Demo.tsx', async () => import('./Demo.tsx?raw')),
         ...catalogSources('plurals-icu', locale),
         ...catalogSources('plurals-mf2', locale),
-      ]}
-    >
+      ]}>
       <PluralsDemo />
     </Scenario>
   );

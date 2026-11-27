@@ -33,13 +33,20 @@ export function FormattingDemo(): ReactNode {
       <div className="controls">
         <label>
           {t.formatting.input.amount()}
-          <input type="number" step="0.01" value={amount} onChange={(event) => {
+          <input
+            type="number"
+            step="0.01"
+            value={amount}
+            onChange={(event) => {
               setAmount(Number(event.target.value));
-            }} />
+            }}
+          />
         </label>
         <label>
           {t.formatting.input.currency()}
-          <select value={currency} onChange={(event) => {
+          <select
+            value={currency}
+            onChange={(event) => {
               setCurrency(event.target.value);
             }}>
             {CURRENCIES.map((code) => (
@@ -51,9 +58,15 @@ export function FormattingDemo(): ReactNode {
         </label>
         <label>
           {t.formatting.input.days()} <code dir="ltr">{days}</code>
-          <input type="range" min={-7} max={14} value={days} onChange={(event) => {
+          <input
+            type="range"
+            min={-7}
+            max={14}
+            value={days}
+            onChange={(event) => {
               setDays(Number(event.target.value));
-            }} />
+            }}
+          />
         </label>
       </div>
       <ul className="values">

@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { catalogSources, fileSource, textSource } from '../../code/sources.js';
 import { shell } from '../../parla/namespaces/shell.js';
 import { Scenario } from '../../Scenario.js';
+
 import { FallbacksDemo } from './Demo.js';
 
 // What `parla build` prints for this namespace.
@@ -22,8 +23,7 @@ export function Page(): ReactNode {
         fileSource('Demo.tsx', async () => import('./Demo.tsx?raw')),
         ...catalogSources('fallbacks', locale === 'en' ? 'de' : locale),
         textSource('parla build', BUILD),
-      ]}
-    >
+      ]}>
       <FallbacksDemo />
     </Scenario>
   );

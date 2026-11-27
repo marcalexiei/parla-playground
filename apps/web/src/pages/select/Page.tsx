@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { catalogSources, fileSource, typesSource } from '../../code/sources.js';
 import { shell } from '../../parla/namespaces/shell.js';
 import { Scenario } from '../../Scenario.js';
+
 import { SelectDemo } from './Demo.js';
 
 export function Page(): ReactNode {
@@ -17,8 +18,7 @@ export function Page(): ReactNode {
         fileSource('Demo.tsx', async () => import('./Demo.tsx?raw')),
         typesSource('select'),
         ...catalogSources('select', locale),
-      ]}
-    >
+      ]}>
       <SelectDemo />
     </Scenario>
   );

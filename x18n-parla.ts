@@ -110,18 +110,26 @@ function namespaceImports(program: Node): Map<string, string> {
 }
 
 /** `[a, b]`; undefined unless every element is an imported namespace object. */
-function namespacesOf(arg: unknown, imports: ReadonlyMap<string, string>): Array<string> | undefined {
+function namespacesOf(
+  arg: unknown,
+  imports: ReadonlyMap<string, string>,
+): Array<string> | undefined {
   if (!isNode(arg) || arg.type !== 'ArrayExpression') {
     return undefined;
   }
   const namespaces = (arg.elements as Array<unknown>).map((element) =>
-    isNode(element) && element.type === 'Identifier' ? imports.get(element.name as string) : undefined,
+    isNode(element) && element.type === 'Identifier'
+      ? imports.get(element.name as string)
+      : undefined,
   );
   return namespaces.every((ns) => ns !== undefined) ? namespaces : undefined;
 }
 
 /** `Translations<typeof a | typeof b>` → the namespaces of `a` and `b`; undefined for anything else. */
-function translationsOf(type: unknown, imports: ReadonlyMap<string, string>): Array<string> | undefined {
+function translationsOf(
+  type: unknown,
+  imports: ReadonlyMap<string, string>,
+): Array<string> | undefined {
   if (!isNode(type) || type.type !== 'TSTypeReference') {
     return undefined;
   }
@@ -133,7 +141,9 @@ function translationsOf(type: unknown, imports: ReadonlyMap<string, string>): Ar
   const queries = arg.type === 'TSUnionType' ? (arg.types as Array<Node>) : [arg];
   const namespaces = queries.map((query) => {
     const expr = query.exprName;
-    return query.type === 'TSTypeQuery' && isNode(expr) ? imports.get(expr.name as string) : undefined;
+    return query.type === 'TSTypeQuery' && isNode(expr)
+      ? imports.get(expr.name as string)
+      : undefined;
   });
   return namespaces.every((ns) => ns !== undefined) ? namespaces : undefined;
 }
@@ -156,7 +166,10 @@ function tName(pattern: Node): string | undefined {
 }
 
 /** `{ t }: { t: Translations<typeof ns> }` in a component's params: `t` passed down by a parent. */
-function propBinding(param: Node, imports: ReadonlyMap<string, string>): [string, Array<string>] | undefined {
+function propBinding(
+  param: Node,
+  imports: ReadonlyMap<string, string>,
+): [string, Array<string>] | undefined {
   const literal = (param.typeAnnotation as Node | null)?.typeAnnotation;
   const name = param.type === 'ObjectPattern' ? tName(param) : undefined;
   if (!isNode(literal) || literal.type !== 'TSTypeLiteral' || name === undefined) {
@@ -165,7 +178,10 @@ function propBinding(param: Node, imports: ReadonlyMap<string, string>): [string
   for (const member of literal.members as Array<Node>) {
     const { key } = member;
     if (member.type === 'TSPropertySignature' && isNode(key) && key.name === 't') {
-      const namespaces = translationsOf((member.typeAnnotation as Node | null)?.typeAnnotation, imports);
+      const namespaces = translationsOf(
+        (member.typeAnnotation as Node | null)?.typeAnnotation,
+        imports,
+      );
       return namespaces && [name, namespaces];
     }
   }
@@ -189,7 +205,12 @@ function collectBindings(node: Node, scope: Node, collect: Collect): void {
   }
   if (node.type === 'VariableDeclarator') {
     const { init, id } = node;
-    if (isNode(init) && init.type === 'CallExpression' && isNode(id) && id.type === 'ObjectPattern') {
+    if (
+      isNode(init) &&
+      init.type === 'CallExpression' &&
+      isNode(id) &&
+      id.type === 'ObjectPattern'
+    ) {
       const { callee } = init;
       const [arg] = init.arguments as Array<Node>;
       const name = tName(id);
@@ -232,7 +253,8 @@ function resolve(
 }
 
 /** The keys a call passes: none without an argument, unknown when they are not static. */
-const paramKeys = (params: Node | undefined): Array<string> | undefined => (params ? staticKeys(params) : []);
+const paramKeys = (params: Node | undefined): Array<string> | undefined =>
+  params ? staticKeys(params) : [];
 
 function accessorScanner(callees: ReadonlySet<string>, declared: Declared): Scanner {
   return {
@@ -262,7 +284,12 @@ function accessorScanner(callees: ReadonlySet<string>, declared: Declared): Scan
           const namespace = head.name as string | undefined;
           const first = segments.at(0);
           const last = segments.at(-1);
-          if (namespace === undefined || !binding.namespaces.includes(namespace) || !first || !last) {
+          if (
+            namespace === undefined ||
+            !binding.namespaces.includes(namespace) ||
+            !first ||
+            !last
+          ) {
             return;
           }
           const params = (call.arguments as Array<Node>).at(0);
@@ -347,7 +374,10 @@ function* leaves(catalog: Catalog, prefix = ''): Generator<[string, string]> {
 }
 
 /** A catalog's JSON; an unreadable one counts as empty. */
-async function readCatalog(readFile: (path: string) => Promise<string | undefined>, path: string): Promise<Catalog> {
+async function readCatalog(
+  readFile: (path: string) => Promise<string | undefined>,
+  path: string,
+): Promise<Catalog> {
   try {
     return JSON.parse((await readFile(path)) ?? '{}') as Catalog;
   } catch {
@@ -399,13 +429,21 @@ async function declare(
  * Each catalog file under the namespace its parla config gives it, so `scopeAudit` may live in
  * `scope_audit.json`; `pre`, so these names win over a `resources` pattern matching the same file.
  */
-function configFinder(configs: ReadonlyArray<string> | undefined, declared: Declared): LocaleFinder {
+function configFinder(
+  configs: ReadonlyArray<string> | undefined,
+  declared: Declared,
+): LocaleFinder {
   let loaded: Promise<Array<ResolvedConfig>> | undefined;
-  const load = async (host: Parameters<LocaleFinder['find']>[0]['host']): Promise<Array<ResolvedConfig>> => {
+  const load = async (
+    host: Parameters<LocaleFinder['find']>[0]['host'],
+  ): Promise<Array<ResolvedConfig>> => {
     loaded ??= (async (): Promise<Array<ResolvedConfig>> => {
       const files =
         configs ??
-        (await host.glob(['**/parla.config.ts'], { ignore: ['**/node_modules/**'], gitignore: true }));
+        (await host.glob(['**/parla.config.ts'], {
+          ignore: ['**/node_modules/**'],
+          gitignore: true,
+        }));
       const all = await Promise.all(files.map(async (file) => loadConfig(host.root, file)));
       await declare(declared, all, async (path) => host.readFile(relative(host.root, path)));
       return all;

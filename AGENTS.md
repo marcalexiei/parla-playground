@@ -12,16 +12,16 @@ Rules for agents in the [Parla](https://github.com/marcalexiei/parla) playground
 
 ## Layout
 
-| Path                    |                                                         |
-| ----------------------- | ------------------------------------------------------- |
-| `apps/web`              | Vite + React; a page per scenario, in `src/pages/<id>/` |
-| `apps/web/src/lab`      | Locale-switch status, chunk delay and log, highlight    |
-| `packages/ui`           | Shared components; owns and builds `common` (ICU)       |
-| `vendor/parla`          | Parla tarballs, committed so CI needs no `../parla`     |
-| `x18n.config.ts`        | [x18n](https://x18n.dev) checks                         |
-| `x18n-parla.ts`         | x18n plugin: parla catalogs, accessors, placeholders    |
-| `oxlint.config.ts`      | oxlint, type-aware: lint after `parla build`            |
-| `.github/workflows`     | `pages.yml` builds and deploys to GitHub Pages          |
+| Path                |                                                         |
+| ------------------- | ------------------------------------------------------- |
+| `apps/web`          | Vite + React; a page per scenario, in `src/pages/<id>/` |
+| `apps/web/src/lab`  | Locale-switch status, chunk delay and log, highlight    |
+| `packages/ui`       | Shared components; owns and builds `common` (ICU)       |
+| `vendor/parla`      | Parla tarballs, committed so CI needs no `../parla`     |
+| `x18n.config.ts`    | [x18n](https://x18n.dev) checks                         |
+| `x18n-parla.ts`     | x18n plugin: parla catalogs, accessors, placeholders    |
+| `oxlint.config.ts`  | oxlint, type-aware: lint after `parla build`            |
+| `.github/workflows` | `pages.yml` builds and deploys to GitHub Pages          |
 
 - **Parla comes from `vendor/parla/*.tgz`**, via `pnpm-workspace.yaml` overrides.
 - **Components get `t` from `useParla([ns])` or a `{ t }: { t: Translations<typeof ns> }` prop**,

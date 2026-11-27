@@ -87,11 +87,15 @@ globalThis.__parlaChunk = async <Module>(
   nextId += 1;
   const started = performance.now();
   const set = (patch: Partial<Chunk>): void => {
-    update((lab) => ({ chunks: lab.chunks.map((chunk) => (chunk.id === id ? { ...chunk, ...patch } : chunk)) }));
+    update((lab) => ({
+      chunks: lab.chunks.map((chunk) => (chunk.id === id ? { ...chunk, ...patch } : chunk)),
+    }));
   };
   const entry = { id, namespace, locale, cause: cause ?? 'useParla' };
   // Deferred: a component suspending in `useParla` starts this during its render.
-  queueMicrotask(() => { update((lab) => ({ chunks: [...lab.chunks, entry] })); });
+  queueMicrotask(() => {
+    update((lab) => ({ chunks: [...lab.chunks, entry] }));
+  });
   try {
     if (state.delay > 0) {
       await sleep(state.delay);

@@ -5,10 +5,13 @@ import { localeName } from '../../lab/locale.js';
 import { fallbacks } from '../../parla/namespaces/fallbacks.js';
 
 // The raw catalogs, only to tell which keys a locale has: Parla's output already filled the rest.
-const catalogs: Record<string, Record<string, unknown>> = import.meta.glob('../../../locales/*/fallbacks.json', {
-  eager: true,
-  import: 'default',
-});
+const catalogs: Record<string, Record<string, unknown>> = import.meta.glob(
+  '../../../locales/*/fallbacks.json',
+  {
+    eager: true,
+    import: 'default',
+  },
+);
 
 export function FallbacksDemo(): ReactNode {
   const { t } = useParla([fallbacks]);
@@ -30,7 +33,9 @@ export function FallbacksDemo(): ReactNode {
           {key in own ? (
             <span className="badge">{t.fallbacks.legend.own()}</span>
           ) : (
-            <span className="badge warn">{t.fallbacks.legend.fallback({ locale: localeName('en', locale) })}</span>
+            <span className="badge warn">
+              {t.fallbacks.legend.fallback({ locale: localeName('en', locale) })}
+            </span>
           )}
         </li>
       ))}

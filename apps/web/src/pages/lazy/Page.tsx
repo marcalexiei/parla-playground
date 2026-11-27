@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { catalogSources, fileSource } from '../../code/sources.js';
 import { shell } from '../../parla/namespaces/shell.js';
 import { Scenario } from '../../Scenario.js';
+
 import { LazyDemo } from './Demo.js';
 
 export function Page(): ReactNode {
@@ -19,8 +20,7 @@ export function Page(): ReactNode {
         fileSource('router.ts', async () => import('../../router.ts?raw')),
         ...catalogSources('lazy', locale),
         ...catalogSources('account', locale),
-      ]}
-    >
+      ]}>
       <LazyDemo />
     </Scenario>
   );

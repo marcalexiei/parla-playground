@@ -28,7 +28,10 @@ export function LazyDemo(): ReactNode {
   return (
     <>
       <p>{t.lazy.loaded()}</p>
-      <button type="button" aria-expanded={open} onClick={() => {
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => {
           setOpen((wasOpen) => !wasOpen);
         }}>
         {open ? t.lazy.hide() : t.lazy.show()}

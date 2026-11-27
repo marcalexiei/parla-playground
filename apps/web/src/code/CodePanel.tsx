@@ -3,6 +3,7 @@ import { useEffect, useEffectEvent, useState } from 'react';
 import type { ReactNode } from 'react';
 
 import { shell } from '../parla/namespaces/shell.js';
+
 import { Code } from './Code.js';
 import type { Source } from './sources.js';
 
@@ -43,8 +44,7 @@ export function CodePanel({ sources }: { sources: ReadonlyArray<Source> }): Reac
             className="tab"
             onClick={() => {
               setTab(index);
-            }}
-          >
+            }}>
             {source.label}
           </button>
         ))}

@@ -1,5 +1,3 @@
-import './styles.css';
-
 import { ParlaProvider } from '@parlajs/react';
 import { common } from '@playground/ui/namespaces/common.js';
 import { StrictMode } from 'react';
@@ -12,6 +10,8 @@ import { withCause } from './lab/store.js';
 import { parla } from './parla.js';
 import { shell } from './parla/namespaces/shell.js';
 import { startRouter } from './router.js';
+
+import './styles.css';
 
 const root = document.querySelector('#root');
 if (!root) {

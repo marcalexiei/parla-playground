@@ -32,15 +32,27 @@ export function PluralsDemo(): ReactNode {
       <div className="controls" dir="ltr">
         <label>
           <code>count = {count}</code>
-          <input type="range" min={0} max={30} value={count} onChange={(event) => {
+          <input
+            type="range"
+            min={0}
+            max={30}
+            value={count}
+            onChange={(event) => {
               setCount(Number(event.target.value));
-            }} />
+            }}
+          />
         </label>
         <label>
           <code>place = {place}</code>
-          <input type="range" min={1} max={30} value={place} onChange={(event) => {
+          <input
+            type="range"
+            min={1}
+            max={30}
+            value={place}
+            onChange={(event) => {
               setPlace(Number(event.target.value));
-            }} />
+            }}
+          />
         </label>
       </div>
       <table className="compare">

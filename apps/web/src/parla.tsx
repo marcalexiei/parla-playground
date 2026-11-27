@@ -12,7 +12,11 @@ const saved = ((): string | null => {
 
 export const parla = createParla({
   catalog,
-  locale: matchLocale(saved ? [saved, ...navigator.languages] : navigator.languages, catalog.locales, catalog.sourceLocale),
+  locale: matchLocale(
+    saved ? [saved, ...navigator.languages] : navigator.languages,
+    catalog.locales,
+    catalog.sourceLocale,
+  ),
   // The config's `functions`: `{$days :relative unit=day}`.
   functions: {
     relative: (value, options, locale) =>

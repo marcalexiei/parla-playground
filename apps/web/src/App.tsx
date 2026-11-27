@@ -40,9 +40,12 @@ export function App(): ReactNode {
           <span className="brand-title">{title}</span>
           <span className="brand-tagline">{t.common.app.tagline()}</span>
         </a>
-        <LocaleSwitcher pending={switching} onSelect={(locale) => {
+        <LocaleSwitcher
+          pending={switching}
+          onSelect={(locale) => {
             void switchLocale(locale);
-          }} />
+          }}
+        />
       </header>
       <LabBar />
       <div className="layout">
@@ -53,10 +56,11 @@ export function App(): ReactNode {
                 <a
                   href={href(route)}
                   aria-current={route === id ? 'page' : undefined}
-                  aria-busy={route === pending}
-                >
+                  aria-busy={route === pending}>
                   {labels[route]}
-                  {route === pending && <span className="spinner" role="status" aria-label={t.common.loading()} />}
+                  {route === pending && (
+                    <span className="spinner" role="status" aria-label={t.common.loading()} />
+                  )}
                 </a>
               </li>
             ))}

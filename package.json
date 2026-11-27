@@ -2,7 +2,6 @@
   "name": "parla-playground",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.34.1",
   "scripts": {
     "dev": "pnpm --filter @playground/ui build && pnpm --filter web dev",
     "build": "pnpm -r run build",
@@ -26,5 +25,6 @@
     "oxlint": "1.92.0",
     "oxlint-tsgolint": "7.0.2006",
     "typescript": "^7.0.2"
-  }
+  },
+  "packageManager": "pnpm@10.34.1"
 }
