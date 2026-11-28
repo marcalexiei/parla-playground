@@ -1,5 +1,6 @@
 import { createParla, matchLocale } from '@parlajs/react';
 
+import { localeFallbacks } from './lab/fallbacks.js';
 import { catalog } from './parla/catalog.js';
 
 const saved = ((): string | null => {
@@ -20,8 +21,8 @@ export const parla = createParla({
   // The config's `functions`: `{$days :relative unit=day}`.
   functions: {
     relative: (value, options, locale) =>
-      // The fallback chain, as Parla's own formatters use it: browsers lack `fur`.
-      new Intl.RelativeTimeFormat([locale, ...(catalog.fallbacks?.[locale] ?? [])], {
+      // Browsers lack `fur`: its fallback chain gives `Intl` Italian.
+      new Intl.RelativeTimeFormat([locale, ...(localeFallbacks[locale] ?? [])], {
         numeric: 'auto',
       }).format(Number(value), (options.unit ?? 'day') as Intl.RelativeTimeFormatUnit),
   },

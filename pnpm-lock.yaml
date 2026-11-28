@@ -896,7 +896,7 @@ packages:
     os: [win32]
 
   '@parlajs/compiler@file:vendor/parla/parlajs-compiler-0.0.0.tgz':
-    resolution: {integrity: sha512-JvN/Sf7NwLl1l8LrkFnt34OMsi6QKgmNzMBQL8ArQ3h4T+5C69+tCUSeALHLqYrlS3k3IB12p3f4NwTmmD3LvQ==, tarball: file:vendor/parla/parlajs-compiler-0.0.0.tgz}
+    resolution: {integrity: sha512-NIgYXmv8lP+R+kisPNc19jZWRRyO9CnZxMpq7spfDa93x2gIUy05tJZXwdjcXZPNMVNeBoNu8MO3hf1ipmB1hw==, tarball: file:vendor/parla/parlajs-compiler-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     hasBin: true
@@ -907,7 +907,7 @@ packages:
         optional: true
 
   '@parlajs/core@file:vendor/parla/parlajs-core-0.0.0.tgz':
-    resolution: {integrity: sha512-/fimJ5d2wlhyhzrAmM2tJYkOUq5WSPFLiYX8/puzj8AowNuAcf94cEXIco/QCMaDLV6w2bKmkrlPW798rta0cw==, tarball: file:vendor/parla/parlajs-core-0.0.0.tgz}
+    resolution: {integrity: sha512-D+UBCCmJXvaSeDJ7BmEkV6PILJHLpxcW50sUr+SqKC9PvOYCArAYbtHJS426bYHZaFU8MinN/CbZo94SANE8ig==, tarball: file:vendor/parla/parlajs-core-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
 
@@ -922,14 +922,14 @@ packages:
     engines: {node: ^24 || >=26}
 
   '@parlajs/react@file:vendor/parla/parlajs-react-0.0.0.tgz':
-    resolution: {integrity: sha512-4ik4XCeTxiOJN++LnZIDsiiG+GiR0LAbHzntHoho2+QKSk49SJQ5uUmtO0TlW++W6EXwkIt6TY8vGS69rBYq+Q==, tarball: file:vendor/parla/parlajs-react-0.0.0.tgz}
+    resolution: {integrity: sha512-wXDIoFZYYRFDFXygNG/yp5SmzkUBZQz13cp8Z5jzjjGLefs17b+224nH8/e3cqi3fHVQjg7Bk6rF1L+lOgfZTw==, tarball: file:vendor/parla/parlajs-react-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     peerDependencies:
       react: '>=19'
 
   '@parlajs/x18n-plugin@file:vendor/parla/parlajs-x18n-plugin-0.0.0.tgz':
-    resolution: {integrity: sha512-h00IWT91o+WDD6LeB2Qg2RIOGrU1JyE1N0gg+2XqC0rrIa8oB3tjMRjM0ifnbPDwsYz8i/Nti6MAeYKnX8GIzw==, tarball: file:vendor/parla/parlajs-x18n-plugin-0.0.0.tgz}
+    resolution: {integrity: sha512-9aS7CVBbqD69Zcne55Bls8nq2zr6cvuqnEnY3VFVqQT/L0g+OG94XIOPD2I8TWugayYVfrB2NDwKykJh7aRuZQ==, tarball: file:vendor/parla/parlajs-x18n-plugin-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     peerDependencies:
