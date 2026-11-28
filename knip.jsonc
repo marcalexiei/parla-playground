@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/knip/schema.json",
+  // knip has no Parla or x18n plugin: their configs are entries, so what they import counts.
+  "workspaces": {
+    ".": { "entry": ["x18n.config.ts"] },
+    "apps/*": { "entry": ["parla.config.ts"] },
+    "packages/*": { "entry": ["parla.config.ts"] }
+  }
+}

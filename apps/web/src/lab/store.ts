@@ -1,7 +1,7 @@
 import type { Locale } from '@parlajs/react';
 import { useSyncExternalStore } from 'react';
 
-export interface Chunk {
+interface Chunk {
   readonly id: number;
   readonly namespace: string;
   readonly locale: string;

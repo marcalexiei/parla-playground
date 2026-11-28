@@ -7,7 +7,7 @@ import { getLab, update, withCause } from './store.js';
 // Firefox has neither `getTextInfo` nor `textInfo` yet.
 const RTL = new Set(['ar', 'fa', 'he', 'ur']);
 
-export function direction(locale: string): 'ltr' | 'rtl' {
+function direction(locale: string): 'ltr' | 'rtl' {
   const tag = new Intl.Locale(locale) as Intl.Locale & {
     getTextInfo?: () => { direction: string };
     textInfo?: { direction: string };

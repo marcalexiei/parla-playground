@@ -12,6 +12,7 @@
     "lint": "oxlint",
     "lint:ci": "oxlint --format=github",
     "lint:fix": "oxlint --fix",
+    "lint:knip": "knip",
     "parla:update": "pnpm --dir ${PARLA_DIR:-../parla} pack:all && cp ${PARLA_DIR:-../parla}/.packs/*.tgz vendor/parla/ && pnpm install --force",
     "preview": "pnpm --filter web preview"
   },
@@ -21,6 +22,7 @@
     "@parlajs/compiler": "0.0.0",
     "@parlajs/x18n-plugin": "0.0.0",
     "@x18n/cli": "0.1.14",
+    "knip": "6.45.1",
     "oxfmt": "0.80.0",
     "oxlint": "1.95.0",
     "oxlint-tsgolint": "7.0.2008",
