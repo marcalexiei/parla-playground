@@ -1133,7 +1133,7 @@ packages:
     os: [win32]
 
   '@parlajs/compiler@file:vendor/parla/parlajs-compiler-0.0.0.tgz':
-    resolution: {integrity: sha512-gnJ/a2boUMu7k2wkmh0ckgrKkD7BL63bElxmE9K3tl6y1I4fRVydpYKwyHWHFuyxuP8dm6hTc2m5B7CpMPE4aQ==, tarball: file:vendor/parla/parlajs-compiler-0.0.0.tgz}
+    resolution: {integrity: sha512-IO7NDobSRlUkCBTVPY/p5n3a6ybo16iKQkYoeFywKCq7gWKBOuj7Ju4gQbzbwgfuC7LI4GicXzAzVt6icdd4dQ==, tarball: file:vendor/parla/parlajs-compiler-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     hasBin: true
@@ -1144,7 +1144,7 @@ packages:
         optional: true
 
   '@parlajs/core@file:vendor/parla/parlajs-core-0.0.0.tgz':
-    resolution: {integrity: sha512-hYm+80j76E4eYU6hf4+SMQGrXXrvnCjpsGodWGWsRHaw953zycpEJ/mM3udRxJ3ulPYVxSqwIkmxAQOZs4+KIA==, tarball: file:vendor/parla/parlajs-core-0.0.0.tgz}
+    resolution: {integrity: sha512-hzht0zVXy7ss1/b6i1KiE2OEB2PbkHRUVGL9vZX3wKZyFrI8NDRkTbybADSYzNUlS0ALDc5AX1umANHyL2/ksw==, tarball: file:vendor/parla/parlajs-core-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
 
