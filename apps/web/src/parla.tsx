@@ -19,9 +19,9 @@ export const parla = createParla({
   ),
   // The config's `functions`: `{$days :relative unit=day}`.
   functions: {
-    relative: (value, options, locale) =>
-      // Parla hands custom functions no chain, and browsers lack `fur`.
-      new Intl.RelativeTimeFormat([locale, ...(catalog.fallbacks?.[locale] ?? [])], {
+    // `locales` ends in a fallback browsers have data for: they lack `fur`.
+    relative: ({ value, options, locales }) =>
+      new Intl.RelativeTimeFormat(locales, {
         numeric: 'auto',
       }).format(Number(value), (options.unit ?? 'day') as Intl.RelativeTimeFormatUnit),
   },

@@ -907,7 +907,7 @@ packages:
         optional: true
 
   '@parlajs/core@file:vendor/parla/parlajs-core-0.0.0.tgz':
-    resolution: {integrity: sha512-ok3lAl5q9nXg7Ft92nhQ94FsBxbZh1tCj+29sCWKkjpGO2Oeh28UXU7J19XP3lCTh0J7pBTYxmwqDGTwEB13uw==, tarball: file:vendor/parla/parlajs-core-0.0.0.tgz}
+    resolution: {integrity: sha512-hYm+80j76E4eYU6hf4+SMQGrXXrvnCjpsGodWGWsRHaw953zycpEJ/mM3udRxJ3ulPYVxSqwIkmxAQOZs4+KIA==, tarball: file:vendor/parla/parlajs-core-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
 
@@ -922,7 +922,7 @@ packages:
     engines: {node: ^24 || >=26}
 
   '@parlajs/react@file:vendor/parla/parlajs-react-0.0.0.tgz':
-    resolution: {integrity: sha512-wXDIoFZYYRFDFXygNG/yp5SmzkUBZQz13cp8Z5jzjjGLefs17b+224nH8/e3cqi3fHVQjg7Bk6rF1L+lOgfZTw==, tarball: file:vendor/parla/parlajs-react-0.0.0.tgz}
+    resolution: {integrity: sha512-7nS08kDtaVN8NzJkOjNedOc8eALMU1Nzp2pQ54AnYnXAN9DA3yFUP5FRj/m/Y12zCcY+l9JMYCMeEikSClHXKA==, tarball: file:vendor/parla/parlajs-react-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     peerDependencies:
