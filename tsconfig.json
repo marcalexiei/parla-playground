@@ -4,5 +4,5 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "include": ["x18n.config.ts", "x18n-parla.ts"]
+  "include": ["x18n.config.ts"]
 }

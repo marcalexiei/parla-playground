@@ -46,7 +46,8 @@ hash, so the site works under `/<repo>/` without rewrites.
 
 ## x18n
 
-[x18n](https://x18n.dev) checks catalogs and usages through `x18n-parla.ts`, which:
+[x18n](https://x18n.dev) checks catalogs and usages through Parla's plugin, `parla()` from
+[`@parlajs/x18n`](https://github.com/marcalexiei/parla/tree/main/packages/x18n), which:
 
 - reads each catalog under the namespace its `parla.config.ts` gives it;
 - finds `t` from `const { t } = useParla([ns])` or a `{ t }: { t: Translations<typeof ns> }` prop,

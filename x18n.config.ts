@@ -1,6 +1,5 @@
+import { parla } from '@parlajs/x18n';
 import { defineConfig } from '@x18n/cli';
-
-import { parla } from './x18n-parla.ts';
 
 export default defineConfig({
   sourceLocale: 'en',

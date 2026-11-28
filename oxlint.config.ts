@@ -41,7 +41,7 @@ export default defineConfig({
     },
     {
       // Only these run on Node; the rest runs in the browser.
-      files: ['**/*.config.ts', 'x18n-parla.ts'],
+      files: ['**/*.config.ts'],
       ...nodeConfig,
       env: { node: true },
     },

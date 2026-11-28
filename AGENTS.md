@@ -18,8 +18,7 @@ Rules for agents in the [Parla](https://github.com/marcalexiei/parla) playground
 | `apps/web/src/lab`  | Locale-switch status, chunk delay and log, highlight    |
 | `packages/ui`       | Shared components; owns and builds `common` (ICU)       |
 | `vendor/parla`      | Parla tarballs, committed so CI needs no `../parla`     |
-| `x18n.config.ts`    | [x18n](https://x18n.dev) checks                         |
-| `x18n-parla.ts`     | x18n plugin: parla catalogs, accessors, placeholders    |
+| `x18n.config.ts`    | [x18n](https://x18n.dev) checks, via `@parlajs/x18n`    |
 | `oxlint.config.ts`  | oxlint, type-aware: lint after `parla build`            |
 | `.github/workflows` | `pages.yml` builds and deploys to GitHub Pages          |
 
@@ -28,7 +27,7 @@ Rules for agents in the [Parla](https://github.com/marcalexiei/parla) playground
   each `ns` imported from a `namespaces/<ns>.js` module: x18n reads nothing else.
 - **A page's namespaces go in its route's `namespaces`** (`routes.ts`), so it never suspends.
 - **Keys reach x18n as `ns:path.to.key`**.
-- **After changing `x18n-parla.ts`, delete `node_modules/.cache/x18n`**: the cache ignores the plugin.
+- **After updating `@parlajs/x18n`, delete `node_modules/.cache/x18n`**: the cache ignores the plugin.
 - **After `parla:update`, start Vite with `--force`**: its pre-bundle keeps the old Parla.
 
 ## Conventions

@@ -9,6 +9,7 @@ overrides:
   '@parlajs/compiler': file:./vendor/parla/parlajs-compiler-0.0.0.tgz
   '@parlajs/format-icu': file:./vendor/parla/parlajs-format-icu-0.0.0.tgz
   '@parlajs/format-mf2': file:./vendor/parla/parlajs-format-mf2-0.0.0.tgz
+  '@parlajs/x18n': file:./vendor/parla/parlajs-x18n-0.0.0.tgz
 
 # Deliberately stricter than pnpm's 1440 default (3 days vs 1)
 minimumReleaseAge: 4320
