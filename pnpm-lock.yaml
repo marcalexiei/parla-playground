@@ -187,7 +187,7 @@ overrides:
   '@parlajs/compiler': file:./vendor/parla/parlajs-compiler-0.0.0.tgz
   '@parlajs/format-icu': file:./vendor/parla/parlajs-format-icu-0.0.0.tgz
   '@parlajs/format-mf2': file:./vendor/parla/parlajs-format-mf2-0.0.0.tgz
-  '@parlajs/x18n': file:./vendor/parla/parlajs-x18n-0.0.0.tgz
+  '@parlajs/x18n-plugin': file:./vendor/parla/parlajs-x18n-plugin-0.0.0.tgz
 
 importers:
 
@@ -202,9 +202,9 @@ importers:
       '@parlajs/compiler':
         specifier: file:vendor/parla/parlajs-compiler-0.0.0.tgz
         version: file:vendor/parla/parlajs-compiler-0.0.0.tgz(vite@8.3.8(jiti@2.7.0)(yaml@2.9.1))
-      '@parlajs/x18n':
-        specifier: file:vendor/parla/parlajs-x18n-0.0.0.tgz
-        version: file:vendor/parla/parlajs-x18n-0.0.0.tgz(@x18n/core@0.1.14(typescript@7.0.2))(vite@8.3.8(jiti@2.7.0)(yaml@2.9.1))
+      '@parlajs/x18n-plugin':
+        specifier: file:vendor/parla/parlajs-x18n-plugin-0.0.0.tgz
+        version: file:vendor/parla/parlajs-x18n-plugin-0.0.0.tgz(@x18n/core@0.1.14(typescript@7.0.2))(vite@8.3.8(jiti@2.7.0)(yaml@2.9.1))
       '@x18n/cli':
         specifier: 0.1.14
         version: 0.1.14(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(typescript@7.0.2)
@@ -928,8 +928,8 @@ packages:
     peerDependencies:
       react: '>=19'
 
-  '@parlajs/x18n@file:vendor/parla/parlajs-x18n-0.0.0.tgz':
-    resolution: {integrity: sha512-dl5RxOswmox+gZ6YTaBIlHvVr1o+KDH6cy7Rdpjh3HJCD7Y0XkNxEnMNgWjg6+7SdFx4JPGAXADufoNB1l3qdw==, tarball: file:vendor/parla/parlajs-x18n-0.0.0.tgz}
+  '@parlajs/x18n-plugin@file:vendor/parla/parlajs-x18n-plugin-0.0.0.tgz':
+    resolution: {integrity: sha512-h00IWT91o+WDD6LeB2Qg2RIOGrU1JyE1N0gg+2XqC0rrIa8oB3tjMRjM0ifnbPDwsYz8i/Nti6MAeYKnX8GIzw==, tarball: file:vendor/parla/parlajs-x18n-plugin-0.0.0.tgz}
     version: 0.0.0
     engines: {node: ^24 || >=26}
     peerDependencies:
@@ -2046,7 +2046,7 @@ snapshots:
       '@parlajs/core': file:vendor/parla/parlajs-core-0.0.0.tgz
       react: 19.3.1
 
-  '@parlajs/x18n@file:vendor/parla/parlajs-x18n-0.0.0.tgz(@x18n/core@0.1.14(typescript@7.0.2))(vite@8.3.8(jiti@2.7.0)(yaml@2.9.1))':
+  '@parlajs/x18n-plugin@file:vendor/parla/parlajs-x18n-plugin-0.0.0.tgz(@x18n/core@0.1.14(typescript@7.0.2))(vite@8.3.8(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
       '@parlajs/compiler': file:vendor/parla/parlajs-compiler-0.0.0.tgz(vite@8.3.8(jiti@2.7.0)(yaml@2.9.1))
       '@x18n/core': 0.1.14(typescript@7.0.2)

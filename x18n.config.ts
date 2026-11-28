@@ -1,4 +1,4 @@
-import { parla } from '@parlajs/x18n';
+import parla from '@parlajs/x18n-plugin';
 import { defineConfig } from '@x18n/cli';
 
 export default defineConfig({
